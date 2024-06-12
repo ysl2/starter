@@ -20,6 +20,7 @@ require("lazy").setup({
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
     { import = "plugins" },
+    -- { import = "lazyvim.plugins.extras.coding" },
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -51,6 +52,6 @@ require("lazy").setup({
     },
   },
   git = {
-    url_format = 'git@github.com:%s.git',
-  }
+    url_format = "git@github.com:%s.git",
+  },
 })
