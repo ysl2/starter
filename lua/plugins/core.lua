@@ -29,4 +29,11 @@ return {
     end,
   },
   { "Exafunction/codeium.nvim", enabled = false },
+  {
+    "akinsho/bufferline.nvim",
+    keys = {
+      { "<S-h>", false },
+      { "<S-l>", false },
+    },
+  },
 }
