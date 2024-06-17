@@ -36,4 +36,14 @@ return {
       { "<S-l>", false },
     },
   },
+  {
+    'csexton/trailertrash.vim',
+    event = 'VeryLazy',
+    config = function()
+      vim.cmd('hi link UnwantedTrailerTrash NONE')
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        command = 'TrailerTrim'
+      })
+    end
+  },
 }

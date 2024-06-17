@@ -12,10 +12,47 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     { import = "lazyvim.plugins.extras.coding" },
+    { import = "lazyvim.plugins.extras.dap" },
+    { import = "lazyvim.plugins.extras.editor" },
+    { import = "lazyvim.plugins.extras.formatting" },
+
+    -- { import = "lazyvim.plugins.extras.lang" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.markdown" },
+    { import = "lazyvim.plugins.extras.lang.python" },
+    { import = "lazyvim.plugins.extras.lang.docker" },
+    { import = "lazyvim.plugins.extras.lang.clangd" },
+    { import = "lazyvim.plugins.extras.lang.cmake" },
+    { import = "lazyvim.plugins.extras.lang.yaml" },
+    { import = "lazyvim.plugins.extras.lang.toml" },
+    { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.lang.java" },
+    { import = "lazyvim.plugins.extras.lang.vue" },
+    { import = "lazyvim.plugins.extras.lang.tex" },
+    { import = "lazyvim.plugins.extras.lang.sql" },
+    { import = "lazyvim.plugins.extras.lang.git" },
+    { import = "lazyvim.plugins.extras.lang.go" },
+
+    { import = "lazyvim.plugins.extras.linting" },
+
+    -- { import = "lazyvim.plugins.extras.lsp" },
+    { import = "lazyvim.plugins.extras.lsp.neoconf" },
+
+    { import = "lazyvim.plugins.extras.test" },
+
+    -- { import = "lazyvim.plugins.extras.ui" },
+    { import = "lazyvim.plugins.extras.ui.mini-starter" },
+
+    -- { import = "lazyvim.plugins.extras.util" },
+    { import = "lazyvim.plugins.extras.util.dot" },
+    { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+    { import = "lazyvim.plugins.extras.util.octo" },
+    { import = "lazyvim.plugins.extras.util.project" },
+    { import = "lazyvim.plugins.extras.util.startuptime" },
+
+    { import = "lazyvim.plugins.extras.vscode" },
     -- import/override with your plugins
     { import = "plugins" },
   },
