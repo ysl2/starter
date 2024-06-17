@@ -53,5 +53,14 @@ return {
         ghost_text = false,
       }
     }
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      window = {
+        width = 30
+      }
+    }
   }
+
 }
