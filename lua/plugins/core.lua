@@ -114,7 +114,6 @@ return {
     opts = {
       notifier = { enabled = false },
       dashboard = { enabled = false },
-      indent = { enabled = false },
     }
   },
   {
@@ -245,35 +244,12 @@ return {
       require("hop").setup()
     end
   },
+  { import = 'lazyvim.plugins.extras.ui.indent-blankline' },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "LazyFile",
     opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
       scope = { enabled = false },
-      exclude = {
-        filetypes = {
-          "Trouble",
-          "alpha",
-          "dashboard",
-          "help",
-          "lazy",
-          "mason",
-          "neo-tree",
-          "notify",
-          "snacks_dashboard",
-          "snacks_notif",
-          "snacks_terminal",
-          "snacks_win",
-          "toggleterm",
-          "trouble",
-        },
-      },
     },
-    main = "ibl",
   },
   {
     'kevinhwang91/nvim-hlslens',
