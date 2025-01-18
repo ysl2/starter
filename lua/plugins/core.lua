@@ -80,6 +80,9 @@ return {
     opts = {
       notifier = { enabled = false },
       dashboard = { enabled = false },
+      indent = {
+        scope = { enabled = false },
+      },
     }
   },
   {

@@ -3,3 +3,4 @@
 -- Add any additional options here
 vim.g.autoformat = false
 vim.opt.guicursor = ""
+vim.g.snacks_animate = false
