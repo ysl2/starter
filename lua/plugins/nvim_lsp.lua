@@ -31,5 +31,18 @@ return {
         end
       })
     end
-  }
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
+    config = function() -- Ref: https://github.com/ray-x/lsp_signature.nvim/issues/341#issuecomment-2466260487
+      require("lsp_signature").on_attach({
+        bind = true,
+        hint_enable = false,
+        handler_opts = {
+          border = "single"
+        }
+      })
+    end,
+  },
 }
