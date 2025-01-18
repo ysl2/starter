@@ -27,6 +27,8 @@ return {
       },
     },
   },
+  { import = "lazyvim.plugins.extras.ui.indent-blankline" },
+  { import = "lazyvim.plugins.extras.ai.copilot" },
   { "folke/noice.nvim", enabled = false },
   {
     "williamboman/mason.nvim",
@@ -244,7 +246,6 @@ return {
       require("hop").setup()
     end
   },
-  { import = 'lazyvim.plugins.extras.ui.indent-blankline' },
   {
     "lukas-reineke/indent-blankline.nvim",
     opts = {
@@ -273,5 +274,18 @@ return {
       calm_down = true,
       nearest_float_when = "never",
     },
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1),
+    opts = {
+      suggestion = {
+        keymap = {
+          accept = "<C-g>",
+          accept_word = "<C-g>",
+          accept_line = "<C-g>"
+        },
+      }
+    }
   },
 }
