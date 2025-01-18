@@ -317,4 +317,34 @@ return {
       }
     },
   },
+  {
+    "kawre/leetcode.nvim",
+    lazy = "leetcode.nvim" ~= vim.fn.argv(0, -1),
+    cmd = "Leet",
+    build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+    dependencies = {
+      "ibhagwan/fzf-lua",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      -- TODO: Try to add image support but failed.
+      -- {
+      --   "3rd/image.nvim",
+      --   opts = {
+      --    backend = "ueberzug" -- brew install jstkdng/programs/ueberzugpp
+      --   }
+      -- }
+    },
+    opts = {
+      -- configuration goes here
+      lang = "python3",
+      cn = { -- leetcode.cn
+          enabled = true,
+          translator = false,
+      },
+      -- image_support = true,
+      plugins = {
+          non_standalone = true,
+      }
+    },
+  },
 }
