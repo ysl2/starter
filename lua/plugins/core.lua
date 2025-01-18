@@ -10,6 +10,8 @@ return {
         end
         vim.api.nvim_create_autocmd("ColorScheme", {
           callback = function()
+            vim.api.nvim_set_hl(0, 'Visual', { reverse = true })
+
             local fg_conceal = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Conceal")), "fg", "gui")
             vim.api.nvim_set_hl(0, "CursorLineNr", { fg = fg_conceal })
             vim.api.nvim_set_hl(0, "LineNr", { fg = fg_conceal })
@@ -209,5 +211,32 @@ return {
         show_close_icon = false,
       }
     }
+  },
+  { "folke/flash.nvim", enabled = false },
+  {
+    "kylechui/nvim-surround",
+    -- version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+        keymaps = {
+          insert = "<A-g>s",
+          insert_line = "<A-g>S",
+        }
+      })
+    end
+  },
+  {
+    "smoka7/hop.nvim",
+    -- version = "*",
+    event = "VeryLazy",
+    keys = {
+      { "s", "<CMD>silent! HopChar1MW<CR>", mode = { "n", "o", "x" }, silent = true },
+      -- { "<LEADER><LEADER>", "<CMD>silent! HopPatternMW<CR>", mode = { "n", "o", "x" }, silent = true }
+    },
+    config = function()
+      require("hop").setup()
+    end
   },
 }
