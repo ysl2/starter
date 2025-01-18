@@ -66,4 +66,10 @@ return {
     "Saghen/blink.cmp",
     build = "cargo build --release"
   },
+  {
+    "folke/snacks.nvim",
+    opts = {
+      notifier = { enabled = false },
+    }
+  },
 }
