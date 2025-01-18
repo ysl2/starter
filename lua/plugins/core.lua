@@ -20,7 +20,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
+    opts = function()
       local parsers = require("nvim-treesitter.parsers").get_parser_configs()
       for _, p in pairs(parsers) do
         p.install_info.url =
@@ -29,13 +29,6 @@ return {
     end,
   },
   { "Exafunction/codeium.nvim", enabled = false },
-  {
-    "akinsho/bufferline.nvim",
-    keys = {
-      { "<S-h>", false },
-      { "<S-l>", false },
-    },
-  },
   {
     "csexton/trailertrash.vim",
     event = "VeryLazy",
