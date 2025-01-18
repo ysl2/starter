@@ -45,4 +45,17 @@ return {
       })
     end,
   },
+  {
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        menu = { border = "single" },
+        documentation = { window = { border = "single" } },
+      },
+      signature = {
+        enabled = false, -- Use lsp_signature instead now, because signature cannot show when in snippet.
+        window = { border = "single" }
+      },
+    }
+  }
 }
