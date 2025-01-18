@@ -149,15 +149,13 @@ return {
   {
     "NvChad/nvim-colorizer.lua",
     event = "VeryLazy",
-    config = function()
-      require("colorizer").setup({
-        filetypes = {
-          "*"; -- Highlight all files, but customize some others.
-          "!neo-tree"; -- Exclude vim from highlighting.
-        -- Exclusion Only makes sense if "*" is specified!
-        },
-      })
-    end,
+    opts = {
+      filetypes = {
+        "*"; -- Highlight all files, but customize some others.
+        "!neo-tree"; -- Exclude vim from highlighting.
+      -- Exclusion Only makes sense if "*" is specified!
+      },
+    }
   },
   {
     "folke/persistence.nvim",
@@ -214,15 +212,13 @@ return {
     "kylechui/nvim-surround",
     -- version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-        keymaps = {
-          insert = "<A-g>s",
-          insert_line = "<A-g>S",
-        }
-      })
-    end
+    opts = {
+      -- Configuration here, or leave empty to use defaults
+      keymaps = {
+        insert = "<A-g>s",
+        insert_line = "<A-g>S",
+      }
+    },
   },
   {
     "smoka7/hop.nvim",
@@ -232,9 +228,7 @@ return {
       { "s", "<CMD>silent! HopChar1MW<CR>", mode = { "n", "o", "x" }, silent = true },
       -- { "<LEADER><LEADER>", "<CMD>silent! HopPatternMW<CR>", mode = { "n", "o", "x" }, silent = true }
     },
-    config = function()
-      require("hop").setup()
-    end
+    opts = {}
   },
   {
     "lukas-reineke/indent-blankline.nvim",
