@@ -29,6 +29,8 @@ return {
   },
   { import = "lazyvim.plugins.extras.ui.indent-blankline" },
   { import = "lazyvim.plugins.extras.ai.copilot" },
+  { import = "lazyvim.plugins.extras.ai.copilot-chat" },
+
   { "folke/noice.nvim", enabled = false },
   {
     "williamboman/mason.nvim",
@@ -279,5 +281,32 @@ return {
         },
       }
     }
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    keys = {
+      { "<C-0>", "<leader>aa", desc = "Toggle (CopilotChat)", mode = { "n", "v" }, remap = true },
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      -- model = "o1",
+      window = {
+        layout = "float",
+        width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
+        height = 0.8, -- fractional height of parent, or absolute height in rows when > 1
+      },
+      mappings = {
+        complete = {
+          insert = "<C-g>",
+        },
+        close = {
+          normal = "<C-0>",
+          insert = "<C-0>",
+        },
+        submit_prompt = {
+          insert = "<C-CR>",
+        },
+      }
+    },
   },
 }
