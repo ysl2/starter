@@ -80,4 +80,28 @@ return {
       })
     end,
   },
+  {
+    "linrongbin16/lsp-progress.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- https://github.com/linrongbin16/lsp-progress.nvim/blob/55a04895ea20c365b670051a3128265d43bdfa3d/lua/lsp-progress/defaults.lua#L133
+      format = function(client_messages)
+        if #client_messages > 0 then
+            return table.concat(client_messages, " ")
+        end
+        return ""
+      end,
+    },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = 'linrongbin16/lsp-progress.nvim',
+    opts = function(_, opts)
+      table.insert(opts.sections.lualine_c, {
+        function()
+          return require("lsp-progress").progress()
+        end,
+      })
+    end
+  }
 }

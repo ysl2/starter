@@ -339,10 +339,45 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    opts = function ()
+      if not package.loaded["copilot"] then return end
+      _G._my_custom_spinners = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+      _G._my_custom_spinner_counter = 0
+    end
+  },
+  {
+    "nvim-lualine/lualine.nvim",
     opts = {
       options = {
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" }
+      },
+      sections = {
+        lualine_c = {
+          'filename',
+        },
+        lualine_x = {
+          function()
+            if not package.loaded["copilot"] then return '' end
+            if vim.opt.ft._value == '' then return '' end
+            local icon = {
+              [''] = '',
+              InProgress = (function()
+                _G._my_custom_spinner_counter = _G._my_custom_spinner_counter % #_G._my_custom_spinners
+                _G._my_custom_spinner_counter = _G._my_custom_spinner_counter + 1
+                return _G._my_custom_spinners[_G._my_custom_spinner_counter]
+              end)(),
+              Normal = '',
+              Warning = '',
+            }
+            local status
+            require("copilot.api").register_status_notification_handler(function(data)
+              status = icon[data.status]
+            end)
+            return status or ''
+          end,
+          'filesize', 'encoding', 'fileformat', function() return vim.opt.filetype._value end
+        },
       },
       refresh = {
         statusline = 0,
