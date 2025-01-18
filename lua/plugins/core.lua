@@ -66,7 +66,6 @@ return {
       end
     end,
   },
-  { "Exafunction/codeium.nvim", enabled = false },
   {
     "csexton/trailertrash.vim",
     event = "VeryLazy",
@@ -76,14 +75,6 @@ return {
         command = "TrailerTrim"
       })
     end
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    opts = {
-      experimental = {
-        ghost_text = false,
-      }
-    }
   },
   {
     "s1n7ax/nvim-window-picker",
