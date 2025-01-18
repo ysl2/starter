@@ -37,12 +37,12 @@ return {
     },
   },
   {
-    'csexton/trailertrash.vim',
-    event = 'VeryLazy',
+    "csexton/trailertrash.vim",
+    event = "VeryLazy",
     config = function()
-      vim.cmd('hi link UnwantedTrailerTrash NONE')
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        command = 'TrailerTrim'
+      vim.cmd("hi link UnwantedTrailerTrash NONE")
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        command = "TrailerTrim"
       })
     end
   },
@@ -61,6 +61,9 @@ return {
         width = 30
       }
     }
-  }
-
+  },
+  {
+    "Saghen/blink.cmp",
+    build = "cargo build --release"
+  },
 }
