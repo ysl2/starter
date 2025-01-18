@@ -125,4 +125,15 @@ return {
       })
     end,
   },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      window = {
+        mappings = {
+          ["<C-s>"] = "open_split",
+          ["<C-v>"] = "open_vsplit",
+        }
+      }
+    }
+  },
 }
