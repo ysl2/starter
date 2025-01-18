@@ -12,13 +12,27 @@ return {
         enabled = false, -- Use lsp_signature instead now, because signature cannot show when in snippet.
         window = { border = "single" }
       },
-      keymap = {
-        ["<Tab>"] = {
-          LazyVim.cmp.map({ "snippet_forward" }),
-          "fallback",
-        }
-      }
-    }
+    },
+  },
+  {
+    "Saghen/blink.cmp",
+    opts = function (_, opts)
+      -- From upstream: remove the "ai_accept" because I use `<C-g>` for ai completion.
+      if not opts.keymap["<Tab>"] then
+        if opts.keymap.preset == "super-tab" then -- super-tab
+          opts.keymap["<Tab>"] = {
+            require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
+            LazyVim.cmp.map({ "snippet_forward" }),
+            "fallback",
+          }
+        else -- other presets
+          opts.keymap["<Tab>"] = {
+            LazyVim.cmp.map({ "snippet_forward" }),
+            "fallback",
+          }
+        end
+      end
+    end
   },
   {
     "neovim/nvim-lspconfig",
