@@ -96,4 +96,17 @@ return {
       }
     end
   },
+  {
+    "NvChad/nvim-colorizer.lua",
+    event = "VeryLazy",
+    config = function()
+      require("colorizer").setup({
+        filetypes = {
+          "*"; -- Highlight all files, but customize some others.
+          "!neo-tree"; -- Exclude vim from highlighting.
+        -- Exclusion Only makes sense if "*" is specified!
+        },
+      })
+    end,
+  },
 }
