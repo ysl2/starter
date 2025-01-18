@@ -136,4 +136,45 @@ return {
       }
     }
   },
+  {
+    "folke/persistence.nvim",
+    lazy = false,
+    -- dependencies = "folke/noice.nvim",
+    config = function(_, opts)
+      local persistence = require("persistence")
+      persistence.setup(opts)
+      vim.api.nvim_create_autocmd("VimEnter", {
+        nested = true,
+        callback = function()
+          -- Auto delete [No Name] buffers.
+          local function _my_custom_del_no_name_buf()
+            if not vim.g.vscode then
+              vim.api.nvim_create_autocmd("BufLeave", {
+                callback = function()
+                  local buffers = vim.fn.filter(vim.fn.range(1, vim.fn.bufnr("$")),
+                    'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
+                  local next = next
+                  if next(buffers) == nil then
+                    return
+                  end
+                  local cmdstr = ":silent! bw!"
+                  for _, v in pairs(buffers) do
+                    cmdstr = cmdstr .. " " .. v
+                  end
+                  vim.cmd(cmdstr)
+                end
+              })
+            end
+          end
+
+          if vim.fn.argc() == 0 and not vim.g.started_with_stdin then
+            persistence.load()
+          else
+            persistence.stop()
+          end
+          _my_custom_del_no_name_buf()
+        end,
+      })
+    end
+  },
 }
