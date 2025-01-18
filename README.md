@@ -5,4 +5,5 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 
 ```bash
 sudo apt install -y xsel
+brew install rustup; rustup toolchain install nightly
 ```
