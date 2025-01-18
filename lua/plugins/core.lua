@@ -275,4 +275,27 @@ return {
     },
     main = "ibl",
   },
+  {
+    'kevinhwang91/nvim-hlslens',
+    keys = {
+      { "/" },
+      { "?" },
+      { "n", function ()
+        vim.cmd("normal! " .. vim.v.count1 .. "n")
+        require("hlslens").start()
+      end, mode = { "n", "v" }, silent = true },
+      { "N", function ()
+        vim.cmd("normal! " .. vim.v.count1 .. "N")
+        require("hlslens").start()
+      end, mode = { "n", "v" }, silent = true },
+      { "*", [[*<CMD>lua require('hlslens').start()<CR>]], mode = { "n", "v" }, silent = true },
+      { "#", [[#<CMD>lua require('hlslens').start()<CR>]], mode = { "n", "v" }, silent = true },
+      { "g*", [[g*<CMD>lua require('hlslens').start()<CR>]], mode = { "n", "v" }, silent = true },
+      { "g#", [[g#<CMD>lua require('hlslens').start()<CR>]], mode = { "n", "v" }, silent = true },
+    },
+    opts = {
+      calm_down = true,
+      nearest_float_when = "never",
+    },
+  },
 }
