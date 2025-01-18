@@ -8,3 +8,4 @@ pcall(vim.cmd, "autocmd! nvim_swapfile")
 vim.g.autoformat = false
 vim.g.snacks_animate = false
 vim.g.ai_cmp = false
+vim.g.lazyvim_blink_main = true

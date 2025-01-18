@@ -1,5 +1,26 @@
 return {
   {
+    "Saghen/blink.cmp",
+    -- NOTE: brew install rustup; rustup toolchain install nightly
+    build = "http_proxy=127.0.0.1:7890 https_proxy=127.0.0.1:7890 cargo build --release",
+    opts = {
+      completion = {
+        menu = { border = "single" },
+        documentation = { window = { border = "single" } },
+      },
+      signature = {
+        enabled = false, -- Use lsp_signature instead now, because signature cannot show when in snippet.
+        window = { border = "single" }
+      },
+      keymap = {
+        ["<Tab>"] = {
+          LazyVim.cmp.map({ "snippet_forward" }),
+          "fallback",
+        }
+      }
+    }
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       diagnostics = {
@@ -45,17 +66,4 @@ return {
       })
     end,
   },
-  {
-    "saghen/blink.cmp",
-    opts = {
-      completion = {
-        menu = { border = "single" },
-        documentation = { window = { border = "single" } },
-      },
-      signature = {
-        enabled = false, -- Use lsp_signature instead now, because signature cannot show when in snippet.
-        window = { border = "single" }
-      },
-    }
-  }
 }
