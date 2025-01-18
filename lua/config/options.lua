@@ -3,6 +3,7 @@
 -- Add any additional options here
 vim.opt.guicursor = ""
 vim.opt.clipboard = ""
+pcall(vim.cmd, "autocmd! nvim_swapfile")
 
 vim.g.autoformat = false
 vim.g.snacks_animate = false
