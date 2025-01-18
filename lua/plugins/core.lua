@@ -27,9 +27,25 @@ return {
       },
     },
   },
-  { import = "lazyvim.plugins.extras.ui.indent-blankline" },
-  { import = "lazyvim.plugins.extras.ai.copilot" },
   { import = "lazyvim.plugins.extras.ai.copilot-chat" },
+  { import = "lazyvim.plugins.extras.ai.copilot" },
+  { import = "lazyvim.plugins.extras.ai.tabnine" },
+  { import = "lazyvim.plugins.extras.coding.neogen" },
+  { import = "lazyvim.plugins.extras.coding.yanky" },
+  { import = "lazyvim.plugins.extras.editor.inc-rename" },
+  { import = "lazyvim.plugins.extras.editor.navic" },
+  { import = "lazyvim.plugins.extras.editor.outline" },
+  { import = "lazyvim.plugins.extras.formatting.prettier" },
+  { import = "lazyvim.plugins.extras.lang.git" },
+  { import = "lazyvim.plugins.extras.lang.go" },
+  { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.markdown" },
+  { import = "lazyvim.plugins.extras.lang.python" },
+  { import = "lazyvim.plugins.extras.lang.sql" },
+  { import = "lazyvim.plugins.extras.lang.tex" },
+  { import = "lazyvim.plugins.extras.lang.toml" },
+  { import = "lazyvim.plugins.extras.lang.yaml" },
+  { import = "lazyvim.plugins.extras.ui.indent-blankline" },
 
   { "folke/noice.nvim", enabled = false },
   {
@@ -114,6 +130,9 @@ return {
     opts = {
       notifier = { enabled = false },
       dashboard = { enabled = false },
+      words = {
+        debounce = 0, -- time in ms to wait before updating
+      }
     }
   },
   {
