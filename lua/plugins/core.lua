@@ -4,6 +4,22 @@ return {
     "LazyVim/LazyVim",
     version = false,
     opts = {
+      colorscheme = (function()
+        if not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) then
+          return "default"
+        end
+        vim.api.nvim_create_autocmd("ColorScheme", {
+          callback = function()
+            local fg_conceal = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Conceal")), "fg", "gui")
+            vim.api.nvim_set_hl(0, "CursorLineNr", { fg = fg_conceal })
+            vim.api.nvim_set_hl(0, "LineNr", { fg = fg_conceal })
+            vim.api.nvim_set_hl(0, "LineNrAbove", { fg = fg_conceal })
+            vim.api.nvim_set_hl(0, "LineNrBelow", { fg = fg_conceal })
+            vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { fg = fg_conceal })
+          end
+        })
+        return "tokyonight"
+      end)(),
       news = {
         lazyvim = false,
       },
