@@ -64,10 +64,42 @@ return {
     }
   },
   {
+    "s1n7ax/nvim-window-picker",
+    keys = {
+      {
+        "<C-w><C-w>",
+        function()
+          local picked_window_id = require("window-picker").pick_window() or vim.api.nvim_get_current_win()
+          vim.api.nvim_set_current_win(picked_window_id)
+        end,
+        mode = "n",
+        silent = true,
+        desc = "Pick a window"
+      }
+    },
+    opts = {
+      show_prompt = false,
+      filter_rules = {
+        bo = {
+          filetype = { "notify" }
+        }
+      }
+    },
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
+    dependencies = "s1n7ax/nvim-window-picker",
     opts = {
       window = {
-        width = 30
+        width = 30,
+        mappings = {
+          ["<C-s>"] = "split_with_window_picker",
+          ["<C-v>"] = "vsplit_with_window_picker",
+          ["<C-t>"] = "open_tab_drop",
+          ["<C-h>"] = "close_all_subnodes",
+          ["<C-c>"] = "revert_preview",
+          ["I"] = "toggle_hidden"
+        }
       }
     }
   },
@@ -127,17 +159,6 @@ return {
         },
       })
     end,
-  },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      window = {
-        mappings = {
-          ["<C-s>"] = "open_split",
-          ["<C-v>"] = "open_vsplit",
-        }
-      }
-    }
   },
   {
     "folke/persistence.nvim",
