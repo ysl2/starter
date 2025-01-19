@@ -46,6 +46,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.toml" },
   { import = "lazyvim.plugins.extras.lang.yaml" },
   { import = "lazyvim.plugins.extras.ui.indent-blankline" },
+  { import = "lazyvim.plugins.extras.util.project" },
 
   { "folke/noice.nvim", enabled = false },
   {
@@ -102,6 +103,11 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = "s1n7ax/nvim-window-picker",
+    keys = {
+      -- Switch `<leader>e` and `<leader>E`
+      { "<leader>e", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      { "<leader>E", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
+    },
     opts = {
       window = {
         width = 30,
@@ -347,5 +353,13 @@ return {
         component_separators = { left = "", right = "" }
       },
     }
-  }
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    lazy = false,
+    opts = {
+      manual_mode = false,
+      patterns = { "._", ".git"  },
+    },
+  },
 }
