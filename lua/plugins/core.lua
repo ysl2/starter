@@ -133,12 +133,16 @@ return {
         win = {
           style = "float",
           border = "single",
+          height = 0.83,
+          width = 0.83,
         },
       },
       terminal = {
         win = {
           style = "float",
           border = "single",
+          height = 0.83,
+          width = 0.83,
         },
       },
     }
