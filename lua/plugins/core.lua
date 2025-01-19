@@ -361,5 +361,49 @@ return {
   {
     "Vimjas/vim-python-pep8-indent",
     ft = "python"
-  }
+  },
+  {
+    "ibhagwan/fzf-lua",
+    opts = {
+      winopts = {
+        border = "single",
+        preview = {
+          border = "single",
+          hidden = true,
+          vertical = "down:15,border-top",
+          layout = "vertical",
+        },
+      },
+      keymap = {
+        builtin = {
+          true,
+          ["<C-r>"] = "toggle-preview",
+        },
+        fzf = {
+          true,
+          ["ctrl-r"] = "toggle-preview",
+        },
+      },
+      actions = {
+        files = {
+          true,
+          ["ctrl-t"] = require("fzf-lua").actions.file_tabedit,
+        },
+      },
+      grep = {
+        winopts = {
+          preview = {
+            hidden = false,
+          },
+        },
+      },
+      lsp = {
+        winopts = {
+          preview = {
+            hidden = false,
+          },
+        },
+      },
+    },
+  },
 }
