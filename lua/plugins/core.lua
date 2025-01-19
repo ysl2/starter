@@ -128,7 +128,19 @@ return {
       dashboard = { enabled = false },
       words = {
         debounce = 0, -- time in ms to wait before updating
-      }
+      },
+      lazygit = {
+        win = {
+          style = "float",
+          border = "single",
+        },
+      },
+      terminal = {
+        win = {
+          style = "float",
+          border = "single",
+        },
+      },
     }
   },
   {
