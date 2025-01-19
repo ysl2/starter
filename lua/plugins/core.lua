@@ -51,11 +51,10 @@ return {
 
   { "folke/noice.nvim", enabled = false },
   {
-    "williamboman/mason.nvim",
+    "nvim-treesitter/nvim-treesitter",
     opts = {
-      github = {
-        download_url_template = "https://mirror.ghproxy.com/https://github.com/%s/releases/download/%s/%s",
-      },
+      highlight = { additional_vim_regex_highlighting = { "python" } },
+      indent = { disable = { "python" } },
     },
   },
   {
@@ -63,8 +62,7 @@ return {
     opts = function()
       local parsers = require("nvim-treesitter.parsers").get_parser_configs()
       for _, p in pairs(parsers) do
-        p.install_info.url =
-          p.install_info.url:gsub("https://github.com/", "https://mirror.ghproxy.com/https://github.com/")
+        p.install_info.url = p.install_info.url:gsub("https://github.com/", "https://mirror.ghproxy.com/https://github.com/")
       end
     end,
   },
@@ -360,4 +358,8 @@ return {
       },
     },
   },
+  {
+    "Vimjas/vim-python-pep8-indent",
+    ft = "python"
+  }
 }
