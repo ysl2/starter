@@ -114,11 +114,25 @@ return {
           ["<C-s>"] = "split_with_window_picker",
           ["<C-v>"] = "vsplit_with_window_picker",
           ["<C-t>"] = "open_tab_drop",
+          ["t"] = "open_tab_drop_and_close_tree",
           ["<C-h>"] = "close_all_subnodes",
           ["<C-c>"] = "revert_preview",
           ["I"] = "toggle_hidden"
         }
-      }
+      },
+      commands = {
+        open_tab_drop_and_close_tree = function(state, toggle_directory)
+          local node = state.tree:get_node()
+          if node.type == "directory" or node.type == "message" or node.type == "terminal" then
+            return
+          end
+          require("neo-tree.sources.common.commands").open_tab_drop(state, toggle_directory)
+          local winid = state.winid
+          if winid and vim.api.nvim_win_is_valid(winid) then
+              vim.api.nvim_win_close(winid, true)
+          end
+        end,
+      },
     }
   },
   {
