@@ -33,3 +33,4 @@ vim.cmd([[
 	" forward one word
 	:cnoremap <Esc><C-F>	<S-Right>
 ]])
+vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { silent = true })
