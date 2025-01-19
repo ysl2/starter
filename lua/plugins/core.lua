@@ -110,7 +110,7 @@ return {
     },
     opts = {
       window = {
-        width = 30,
+        width = "20%",
         mappings = {
           ["<C-s>"] = "split_with_window_picker",
           ["<C-v>"] = "vsplit_with_window_picker",
@@ -360,6 +360,14 @@ return {
     opts = {
       manual_mode = false,
       patterns = { "._", ".git"  },
+    },
+  },
+  {
+    "hedyhli/outline.nvim",
+    opts = {
+      outline_window = {
+        width = 20,
+      },
     },
   },
 }
