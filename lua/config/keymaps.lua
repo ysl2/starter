@@ -3,10 +3,6 @@
 -- Add any additional keymaps here
 vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
-vim.keymap.del("n", "<C-h>")
-vim.keymap.del("n", "<C-j>")
-vim.keymap.del("n", "<C-k>")
-vim.keymap.del("n", "<C-l>")
 
 vim.keymap.del("v", "<")
 vim.keymap.del("v", ">")
@@ -34,3 +30,4 @@ vim.cmd([[
 	:cnoremap <Esc><C-F>	<S-Right>
 ]])
 vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { silent = true })
+vim.keymap.set("n", "<C-w>z", "<C-w>|<C-w>_", { silent = true })
