@@ -46,6 +46,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.toml" },
   { import = "lazyvim.plugins.extras.lang.yaml" },
   { import = "lazyvim.plugins.extras.ui.indent-blankline" },
+  { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   { import = "lazyvim.plugins.extras.util.project" },
 
   { "folke/noice.nvim", enabled = false },
@@ -161,17 +162,6 @@ return {
         }
       }
     end
-  },
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = "VeryLazy",
-    opts = {
-      filetypes = {
-        "*"; -- Highlight all files, but customize some others.
-        "!neo-tree"; -- Exclude vim from highlighting.
-      -- Exclusion Only makes sense if "*" is specified!
-      },
-    }
   },
   {
     "folke/persistence.nvim",
