@@ -76,10 +76,6 @@ return {
     end
   },
   {
-    "saghen/blink.compat",
-    url = "git@github.com:ysl2/blink.compat.git"
-  },
-  {
     "tzachar/cmp-tabnine",
     lazy = true,
   }
