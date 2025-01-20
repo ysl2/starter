@@ -440,4 +440,16 @@ return {
     "tpope/vim-rsi",
     event = "InsertEnter"
   },
+  {
+    "gbprod/yanky.nvim",
+    opts = {
+      highlight = {
+        on_put = false,
+        timer = vim.highlight.priorities.user,
+      },
+      preserve_cursor_position = {
+        enabled = false,
+      },
+    },
+  },
 }
