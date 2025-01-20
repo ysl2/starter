@@ -8,6 +8,11 @@ vim.keymap.del("v", "<")
 vim.keymap.del("v", ">")
 
 vim.keymap.set("n", "<leader>ba", function() Snacks.bufdelete.all() end, { desc = "Delete All Buffers" })
+vim.keymap.set("x", "<esc>", function()
+  vim.cmd("noh")
+  LazyVim.cmp.actions.snippet_stop()
+  return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
 vim.keymap.set({ "i", "n", "s", "x" }, "<C-c>", "<esc>", { remap = true, desc = "Escape and Clear hlsearch" })
 vim.cmd([[
 	" start of line
