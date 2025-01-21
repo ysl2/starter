@@ -48,3 +48,29 @@ vim.keymap.set("n", "<C-w><C-h>", function() return check_no_name_buffer("bel vs
 vim.keymap.set("n", "<C-w><C-j>", function() return check_no_name_buffer("abo sp | silent! b# | winc p") end, { silent = true, desc = "Move current buffer to down" })
 vim.keymap.set("n", "<C-w><C-k>", function() return check_no_name_buffer("bel sp | silent! b# | winc p") end, { silent = true, desc = "Move current buffer to up" })
 vim.keymap.set("n", "<C-w><C-l>", function() return check_no_name_buffer("abo vs | silent! b# | winc p") end, { silent = true, desc = "Move current buffer to right" })
+
+-- Diffview
+local diffwins = {}
+local function diffwins_clean()
+  vim.cmd("diffoff!")
+  diffwins = {}
+end
+vim.keymap.set("n", "<leader>da", function()
+  if #diffwins >= 2 then return diffwins_clean() end
+  local win = vim.fn.winnr()
+  local catched = false
+  for _, w in ipairs(diffwins) do
+    if w == win then
+      catched = true
+      break
+    end
+  end
+  if catched then
+    vim.cmd("diffoff")
+    table.remove(diffwins, win)
+  else
+    vim.cmd("diffthis")
+    table.insert(diffwins, win)
+  end
+end, { silent = true, desc = "Diff this buffer" })
+vim.keymap.set("n", "<leader>do", diffwins_clean, { silent = true, desc = "Diff off all buffers" })

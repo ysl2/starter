@@ -31,7 +31,17 @@ return {
         end
         vim.api.nvim_create_autocmd("ColorScheme", {
           callback = function()
-            vim.api.nvim_set_hl(0, 'Visual', { reverse = true })
+            vim.api.nvim_set_hl(0, "Visual", { reverse = true })
+            vim.api.nvim_set_hl(0, "IncSearch", { reverse = true })
+            vim.api.nvim_set_hl(0, "Search", { reverse = true })
+
+            local opts = { underline = true, bold = true }
+            vim.api.nvim_set_hl(0, "DiffAdd", opts)
+            vim.api.nvim_set_hl(0, "DiffChange", opts)
+            vim.api.nvim_set_hl(0, "DiffDelete", { reverse = true })
+            local fg_incsearch = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID('IncSearch')), 'bg', 'gui')
+            vim.api.nvim_set_hl(0, 'DiffText', { reverse = true, bold = true , fg = fg_incsearch })
+
 
             local fg_conceal = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Conceal")), "fg", "gui")
             vim.api.nvim_set_hl(0, "CursorLineNr", { fg = fg_conceal })
