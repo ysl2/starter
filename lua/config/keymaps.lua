@@ -36,3 +36,15 @@ vim.cmd([[
 ]])
 vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { silent = true, desc = "Back to normal mode in terminal" })
 vim.keymap.set("n", "<C-w>z", "<C-w>|<C-w>_", { silent = true, desc = "Maximize current window" })
+
+-- Move buffers.
+local function check_no_name_buffer(cmdstr)
+  if vim.fn.empty(vim.fn.bufname(vim.fn.bufnr())) == 1 then
+    return
+  end
+  vim.cmd(cmdstr)
+end
+vim.keymap.set("n", "<C-w><C-h>", function() return check_no_name_buffer("bel vs | silent! b# | winc p") end, { silent = true, desc = "Move current buffer to left" })
+vim.keymap.set("n", "<C-w><C-j>", function() return check_no_name_buffer("abo sp | silent! b# | winc p") end, { silent = true, desc = "Move current buffer to down" })
+vim.keymap.set("n", "<C-w><C-k>", function() return check_no_name_buffer("bel sp | silent! b# | winc p") end, { silent = true, desc = "Move current buffer to up" })
+vim.keymap.set("n", "<C-w><C-l>", function() return check_no_name_buffer("abo vs | silent! b# | winc p") end, { silent = true, desc = "Move current buffer to right" })
