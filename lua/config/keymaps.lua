@@ -34,5 +34,5 @@ vim.cmd([[
 	" forward one word
 	:cnoremap <Esc><C-F>	<S-Right>
 ]])
-vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { silent = true })
-vim.keymap.set("n", "<C-w>z", "<C-w>|<C-w>_", { silent = true })
+vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { silent = true, desc = "Back to normal mode in terminal" })
+vim.keymap.set("n", "<C-w>z", "<C-w>|<C-w>_", { silent = true, desc = "Maximize current window" })
