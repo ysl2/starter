@@ -8,6 +8,12 @@ vim.keymap.del("v", "<")
 vim.keymap.del("v", ">")
 
 vim.keymap.set("n", "<leader>ba", function() Snacks.bufdelete.all() end, { desc = "Delete All Buffers" })
+vim.keymap.set("n", "<c-\\>", function()
+  local tmux = os.getenv("MYTMUX")
+  tmux = tmux ~= "" and tmux or "tmux"
+  Snacks.terminal(tmux .. " new-session -s" .. " nvim-" .. vim.loop.os_getpid(), { cwd = LazyVim.root() })
+end, { desc = "Tmux (Root Dir)" })
+vim.keymap.set("t", "<C-\\>", "<C-/>", { remap = true, desc = "Hide Terminal" })
 vim.keymap.set("x", "<esc>", function()
   vim.cmd("noh")
   LazyVim.cmp.actions.snippet_stop()
