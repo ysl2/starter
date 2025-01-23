@@ -45,6 +45,20 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      servers = {
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = {
+                -- NOTE: LSP[gopls] Invalid settings: setting option "analyses": this setting is deprecated,
+                -- use "the 'fieldalignment' analyzer was removed in gopls/v0.17.0;
+                -- instead, hover over struct fields to see size/offset information (https://go.dev/issue/66861)" instead
+                fieldalignment = false
+              },
+            },
+          },
+        },
+      },
       diagnostics = {
         virtual_text = false,
         float = {
