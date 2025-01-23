@@ -21,14 +21,12 @@ return {
   { import = "lazyvim.plugins.extras.util.project" },
 
   { "folke/lazy.nvim", version = false },
+  { "Mofiqul/vscode.nvim" },
   {
     "LazyVim/LazyVim",
     version = false,
     opts = {
       colorscheme = (function()
-        if not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) then
-          return "default"
-        end
         vim.api.nvim_create_autocmd("ColorScheme", {
           callback = function()
             vim.api.nvim_set_hl(0, "Visual", { reverse = true })
@@ -51,6 +49,9 @@ return {
             vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { fg = fg_conceal })
           end
         })
+        if not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) then
+          return "vscode"
+        end
         return "tokyonight"
       end)(),
       news = {
