@@ -15,6 +15,8 @@ vim.opt.guicursor = ""
 vim.opt.clipboard = ""
 vim.opt.confirm = false
 vim.opt.laststatus = 2
+vim.opt.shiftwidth = 4 -- Size of an indent
+vim.opt.tabstop = 4 -- Number of spaces tabs count for
 
 vim.g.autoformat = false
 vim.g.snacks_animate = false
