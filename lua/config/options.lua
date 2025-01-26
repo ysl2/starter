@@ -18,6 +18,14 @@ vim.opt.laststatus = 2
 vim.opt.shiftwidth = 4 -- Size of an indent
 vim.opt.tabstop = 4 -- Number of spaces tabs count for
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+  end
+})
+
 vim.g.autoformat = false
 vim.g.snacks_animate = false
 vim.g.ai_cmp = false
