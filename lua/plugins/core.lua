@@ -20,11 +20,10 @@ return {
   { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   { import = "lazyvim.plugins.extras.util.project" },
 
-  { "folke/lazy.nvim", version = false },
-  { "Mofiqul/vscode.nvim" },
+  { "folke/lazy.nvim", version = "*" },
   {
     "LazyVim/LazyVim",
-    version = false,
+    version = "*",
     opts = {
       colorscheme = (function()
         vim.api.nvim_create_autocmd("ColorScheme", {
@@ -477,4 +476,5 @@ return {
       },
     },
   },
+  { "Mofiqul/vscode.nvim" },
 }
