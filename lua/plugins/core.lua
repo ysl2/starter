@@ -1,7 +1,7 @@
 return {
-  { import = "lazyvim.plugins.extras.ai.copilot-chat" },
-  { import = "lazyvim.plugins.extras.ai.copilot" },
-  { import = "lazyvim.plugins.extras.ai.tabnine" },
+  { import = "lazyvim.plugins.extras.ai.copilot-chat", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
+  { import = "lazyvim.plugins.extras.ai.copilot", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
+  { import = "lazyvim.plugins.extras.ai.tabnine", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
   { import = "lazyvim.plugins.extras.coding.neogen" },
   { import = "lazyvim.plugins.extras.coding.yanky" },
   { import = "lazyvim.plugins.extras.editor.inc-rename" },
@@ -320,7 +320,6 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1),
     opts = {
       suggestion = {
         keymap = {
