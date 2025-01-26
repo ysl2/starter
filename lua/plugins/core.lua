@@ -418,10 +418,14 @@ return {
         builtin = {
           true,
           ["<C-r>"] = "toggle-preview",
+          ["<C-u>"] = "preview-page-up",
+          ["<C-d>"] = "preview-page-down",
         },
         fzf = {
           true,
           ["ctrl-r"] = "toggle-preview",
+          ["ctrl-u"] = "preview-page-up",
+          ["ctrl-d"] = "preview-page-down",
         },
       },
       actions = {
@@ -445,6 +449,17 @@ return {
         },
       },
     },
+  },
+  {
+    "ibhagwan/fzf-lua",
+    opts = function()
+      local fzf = require("fzf-lua")
+      local config = fzf.config
+      config.defaults.keymap.fzf["ctrl-f"] = nil
+      config.defaults.keymap.fzf["ctrl-b"] = nil
+      config.defaults.keymap.builtin["<c-f>"] = nil
+      config.defaults.keymap.builtin["<c-b>"] = nil
+    end
   },
   {
     "tpope/vim-rsi",
