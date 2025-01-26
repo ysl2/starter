@@ -189,9 +189,9 @@ return {
         callback = function()
           local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
           if client and client.name == "Firenvim" then
+            vim.cmd("set guifont=FiraCode\\ Nerd\\ Font:h25")
             vim.opt.laststatus = 0
             vim.opt.swapfile = false
-            vim.cmd("set guifont=FiraCode\\ Nerd\\ Font:h25")
           end
         end
       })

@@ -47,3 +47,5 @@ vim.api.nvim_create_autocmd("VimLeave", {
     clean_dangling_tmux_sessions(args)
   end,
 })
+
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
