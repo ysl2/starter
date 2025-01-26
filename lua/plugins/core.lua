@@ -56,6 +56,14 @@ return {
       news = {
         lazyvim = false,
       },
+      icons = {
+        diagnostics = {
+          Error = " ",
+          Warn  = " ",
+          Hint  = " ",
+          Info  = " ",
+        },
+      },
     },
   },
   { "folke/noice.nvim", enabled = false },
