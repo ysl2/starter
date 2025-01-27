@@ -493,4 +493,5 @@ return {
     },
   },
   { "Mofiqul/vscode.nvim" },
+  { "MeanderingProgrammer/render-markdown.nvim", enabled = false },
 }

@@ -11,12 +11,12 @@ vim.opt.lazyredraw = true
 -- ==
 -- == Set by LazyVim, and modified by myself
 -- ==
-vim.opt.guicursor = ""
 vim.opt.clipboard = ""
 vim.opt.confirm = false
 vim.opt.laststatus = 2
-vim.opt.shiftwidth = 4 -- Size of an indent
-vim.opt.tabstop = 4 -- Number of spaces tabs count for
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.conceallevel = 0
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
