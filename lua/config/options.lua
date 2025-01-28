@@ -13,7 +13,6 @@ vim.opt.lazyredraw = true
 -- ==
 vim.opt.clipboard = ""
 vim.opt.confirm = false
-vim.opt.laststatus = 2
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.conceallevel = 0

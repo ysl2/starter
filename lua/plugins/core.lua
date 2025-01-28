@@ -78,13 +78,13 @@ return {
             local fg_incsearch = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID('IncSearch')), 'bg', 'gui')
             vim.api.nvim_set_hl(0, 'DiffText', { reverse = true, bold = true , fg = fg_incsearch })
 
-
             local fg_conceal = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Conceal")), "fg", "gui")
             vim.api.nvim_set_hl(0, "CursorLineNr", { fg = fg_conceal })
             vim.api.nvim_set_hl(0, "LineNr", { fg = fg_conceal })
             vim.api.nvim_set_hl(0, "LineNrAbove", { fg = fg_conceal })
             vim.api.nvim_set_hl(0, "LineNrBelow", { fg = fg_conceal })
             vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { fg = fg_conceal })
+            vim.api.nvim_set_hl(0, 'WinSeparator', { fg = fg_conceal })
           end
         })
         if not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) then
