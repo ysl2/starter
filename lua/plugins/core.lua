@@ -23,7 +23,40 @@ return {
 
   -- Colorschemes
   { "Mofiqul/vscode.nvim", cond = not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) },
-  { "folke/tokyonight.nvim", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
+  -- { "folke/tokyonight.nvim", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
+  { "thesimonho/kanagawa-paper.nvim",
+    cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1),
+    opts = {
+      dimInactive = false,
+      -- Ref: https://github.com/thesimonho/kanagawa-paper.nvim?tab=readme-ov-file#common-customizations
+      overrides = function(colors)
+        local theme = colors.theme
+        return {
+          NormalFloat = { bg = "NONE" },
+          FloatBorder = { bg = "NONE" },
+          FloatTitle = { bg = "NONE" },
+
+          -- Save a hlgroup with dark background and dimmed foreground
+          -- so that you can use it where you still want darker windows.
+          -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
+          NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+
+          -- Popular plugins that open floats will link to NormalFloat by default;
+          -- set their background accordingly if you wish to keep them dark and borderless
+          -- LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+          -- MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+
+          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
+          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+          PmenuSbar = { bg = theme.ui.bg_m1 },
+          PmenuThumb = { bg = theme.ui.bg_p2 },
+
+          StatusLine = { bg = theme.ui.bg_p1 },
+          StatusLineNC = { bg = theme.ui.bg_p1 },
+        }
+      end,
+    },
+  },
 
   -- Others
   { "folke/lazy.nvim", version = "*" },
@@ -57,7 +90,8 @@ return {
         if not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) then
           return "vscode"
         end
-        return "tokyonight"
+        -- return "tokyonight"
+        return "kanagawa-paper"
       end)(),
       news = {
         lazyvim = false,
