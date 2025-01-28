@@ -31,3 +31,4 @@ vim.g.snacks_animate = false
 vim.g.ai_cmp = false
 vim.g.lazyvim_blink_main = true
 vim.g.autowrite = false
+vim.g.lazyvim_cmp = "nvim-cmp"

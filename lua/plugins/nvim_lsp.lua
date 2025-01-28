@@ -92,5 +92,37 @@ return {
   {
     "tzachar/cmp-tabnine",
     lazy = true,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    url = "git@github.com:iguanacucumber/magazine.nvim.git",
+    opts = {
+      window = {
+        completion = require("cmp").config.window.bordered({ border = "single" }),
+        documentation = require("cmp").config.window.bordered({ border = "single" }),
+      },
+      mapping = require("cmp").mapping.preset.insert({
+        ["<tab>"] = function(fallback)
+          -- From upstream: remove the "ai_accept" because I use `<C-g>` for ai completion.
+          return LazyVim.cmp.map({ "snippet_forward" }, fallback)()
+        end,
+      }),
+    }
+  },
+  { "hrsh7th/cmp-nvim-lsp", url = "git@github.com:iguanacucumber/mag-nvim-lsp.git" },
+  { "hrsh7th/cmp-buffer", url = "git@github.com:iguanacucumber/mag-buffer.git" },
+  { "hrsh7th/cmp-path", url = "https://codeberg.org/FelipeLema/cmp-async-path" },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
+    config = function() -- Ref: https://github.com/ray-x/lsp_signature.nvim/issues/341#issuecomment-2466260487
+      require("lsp_signature").on_attach({
+        bind = true,
+        hint_enable = false,
+        handler_opts = {
+          border = "single"
+        }
+      })
+    end,
   }
 }
