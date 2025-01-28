@@ -1,4 +1,5 @@
 return {
+  -- Imports
   { import = "lazyvim.plugins.extras.ai.copilot-chat", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
   { import = "lazyvim.plugins.extras.ai.copilot", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
   { import = "lazyvim.plugins.extras.ai.tabnine", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
@@ -20,6 +21,11 @@ return {
   { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   { import = "lazyvim.plugins.extras.util.project" },
 
+  -- Colorschemes
+  { "Mofiqul/vscode.nvim", cond = not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) },
+  { "folke/tokyonight.nvim", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
+
+  -- Others
   { "folke/lazy.nvim", version = "*" },
   {
     "LazyVim/LazyVim",
@@ -63,6 +69,11 @@ return {
           Hint  = " ",
           Info  = " ",
         },
+        git = {
+          added = "+",
+          modified = "~",
+          removed = "-",
+        }
       },
     },
   },
@@ -150,7 +161,7 @@ return {
           end
         end,
       },
-    }
+    },
   },
   {
     "folke/snacks.nvim",
@@ -500,6 +511,5 @@ return {
       },
     },
   },
-  { "Mofiqul/vscode.nvim" },
   { "MeanderingProgrammer/render-markdown.nvim", enabled = false },
 }
