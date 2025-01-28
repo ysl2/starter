@@ -395,6 +395,14 @@ return {
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" }
       },
+      sections = {
+        lualine_z = {
+          function()
+            local date = vim.loop.os_uname().sysname == "Darwin" and "gdate" or "date"
+            return " " .. vim.system({ date, "+%H:%M:%S.%3N" }, { text = true }):wait().stdout:gsub("\n", "")
+          end,
+        }
+      }
     }
   },
   {
