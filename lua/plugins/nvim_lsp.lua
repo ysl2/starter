@@ -5,6 +5,7 @@ return {
       github = {
         download_url_template = "https://mirror.ghproxy.com/https://github.com/%s/releases/download/%s/%s",
       },
+      ensure_installed = { "prettierd" },
     },
   },
   {
@@ -124,5 +125,33 @@ return {
         }
       })
     end,
-  }
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      local supported = {
+        "css",
+        "graphql",
+        "handlebars",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "less",
+        "markdown",
+        "markdown.mdx",
+        "scss",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "yaml",
+      }
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      for _, ft in ipairs(supported) do
+        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
+        table.insert(opts.formatters_by_ft[ft], "prettierd")
+      end
+    end,
+  },
 }
