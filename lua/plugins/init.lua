@@ -471,6 +471,10 @@ return {
   },
   {
     "ibhagwan/fzf-lua",
+    keys = {
+      { "<leader><leader>", "<leader>fF", desc = "Find Files (cwd)", remap = true },
+      { "<leader>/", "<leader>sG", desc = "Grep (cwd)", remap = true },
+    },
     opts = {
       winopts = {
         border = "single",
