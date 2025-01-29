@@ -564,4 +564,14 @@ return {
     },
   },
   { "MeanderingProgrammer/render-markdown.nvim", enabled = false },
+  {
+    "lervag/vimtex",
+    opts = function()
+      if not LazyVim.is_win() then
+        vim.g.vimtex_view_method = "zathura"
+      end
+      vim.g.vimtex_quickfix_mode = 0
+      vim.g.vimtex_view_zathura_use_synctex = 0
+    end
+  },
 }
