@@ -454,7 +454,8 @@ return {
     lazy = false,
     opts = {
       manual_mode = false,
-      patterns = { "._", ".git"  },
+      detection_methods = { "pattern" },
+      patterns = { "._", ".git" },
     },
   },
   {
