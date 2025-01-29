@@ -502,7 +502,22 @@ return {
           ["ctrl-t"] = require("fzf-lua").actions.file_tabedit,
         },
       },
+      files = {
+        actions = {
+          ["alt-h"] = false,
+          ["alt-i"] = false,
+          ["ctrl-g"] = false,
+          ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden,
+          ["ctrl-l"] = require("fzf-lua").actions.toggle_ignore
+        },
+      },
       grep = {
+        actions = {
+          ["alt-h"] = false,
+          ["alt-i"] = false,
+          ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden,
+          ["ctrl-l"] = require("fzf-lua").actions.toggle_ignore
+        },
         winopts = {
           preview = {
             hidden = false,
@@ -521,8 +536,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     opts = function()
-      local fzf = require("fzf-lua")
-      local config = fzf.config
+      local config = require("fzf-lua").config
       config.defaults.keymap.fzf["ctrl-f"] = nil
       config.defaults.keymap.fzf["ctrl-b"] = nil
       config.defaults.keymap.builtin["<c-f>"] = nil
