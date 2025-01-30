@@ -3,9 +3,12 @@
 -- Add any additional keymaps here
 vim.keymap.del("n", "H")
 vim.keymap.del("n", "L")
-
 vim.keymap.del("v", "<")
 vim.keymap.del("v", ">")
+vim.keymap.del({ "n", "x" }, "j")
+vim.keymap.del({ "n", "x" }, "k")
+vim.keymap.del({ "n", "x", "o" }, "n")
+vim.keymap.del({ "n", "x", "o" }, "N")
 
 vim.keymap.set("n", "<leader>ba", function() Snacks.bufdelete.all() end, { desc = "Delete All Buffers" })
 vim.keymap.set("n", "<c-\\>", function()
@@ -20,6 +23,10 @@ vim.keymap.set("x", "<esc>", function()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 vim.keymap.set({ "i", "n", "s", "x" }, "<C-c>", "<esc>", { remap = true, desc = "Escape and Clear hlsearch" })
+vim.keymap.set({"n", "v"}, "<C-a>", "")
+vim.keymap.set({"n", "v"}, "<C-x>", "")
+vim.keymap.set({"n", "v"}, "<A-a>", "<C-a>", { desc = "Increment number under cursor" })
+vim.keymap.set({"n", "v"}, "<A-x>", "<C-x>", { desc = "Decrement number under cursor" })
 vim.cmd([[
 	" start of line
 	:cnoremap <C-A>		<Home>
@@ -40,7 +47,7 @@ vim.cmd([[
 	" forward one word
 	:cnoremap <Esc><C-F>	<S-Right>
 ]])
-vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { silent = true, desc = "Back to normal mode in terminal" })
+vim.keymap.set("t", "<C-[>", "<C-\\><C-n>", { silent = true, desc = "Back to normal mode in terminal" })
 vim.keymap.set("n", "<C-w>z", "<C-w>|<C-w>_", { silent = true, desc = "Maximize current window" })
 
 -- Move buffers.
