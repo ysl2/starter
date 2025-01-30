@@ -66,7 +66,8 @@ return {
           border = "single",
         },
         update_in_insert = true,
-      }
+      },
+      inlay_hints = { enabled = false },
     },
   },
   {
