@@ -13,10 +13,10 @@ vim.opt.lazyredraw = true
 -- ==
 vim.opt.clipboard = ""
 vim.opt.confirm = false
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
 vim.opt.conceallevel = 0
 
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   callback = function()
