@@ -164,8 +164,15 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = "s1n7ax/nvim-window-picker",
     keys = {
-      -- Switch `<leader>e` and `<leader>E`
-      { "<leader>e", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      -- Switch `<leader>e` and `<leader>E`, and add wincmd = for <leader>e.
+      {
+        "<leader>e",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+          vim.cmd("wincmd =")
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
       { "<leader>E", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
     },
     opts = {
