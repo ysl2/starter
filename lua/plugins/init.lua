@@ -581,4 +581,29 @@ return {
       vim.g.vimtex_view_zathura_use_synctex = 0
     end
   },
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    keys = {
+      { "<leader>ut", function() require("undotree").toggle() end, desc = "Toggle undotree" },
+    },
+    opts = {
+      float_diff = false,
+      layout = "left_left_bottom",
+      position = "right",
+    },
+    config = function(_, opts)
+      local undotree = require("undotree")
+      undotree.setup(opts)
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "undotreeDiff",
+        callback = function()
+          vim.keymap.set("n", "<C-w>q", function()
+            undotree.toggle()
+          end, { buffer = true, desc = "Toggle undotree for undotreeDiff filetype." })
+        end
+      })
+    end
+  },
 }
