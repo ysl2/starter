@@ -471,6 +471,9 @@ return {
       outline_window = {
         width = 20,
       },
+      symbol_folding = {
+        autofold_depth = vim.opt.foldlevel:get(),
+      },
     },
   },
   {
