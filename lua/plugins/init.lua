@@ -66,24 +66,32 @@ return {
       colorscheme = (function()
         vim.api.nvim_create_autocmd("ColorScheme", {
           callback = function()
-            vim.api.nvim_set_hl(0, "Visual", { reverse = true })
-            vim.api.nvim_set_hl(0, "IncSearch", { reverse = true })
-            vim.api.nvim_set_hl(0, "Search", { reverse = true })
+            -- For search
+            local opts = { reverse = true }
+            vim.api.nvim_set_hl(0, "Visual", opts)
+            vim.api.nvim_set_hl(0, "IncSearch", opts)
+            vim.api.nvim_set_hl(0, "Search", opts)
+            vim.api.nvim_set_hl(0, "CurSearch", opts)
+            vim.api.nvim_set_hl(0, "Substitute", opts)
 
-            local opts = { underline = true, bold = true }
-            vim.api.nvim_set_hl(0, "DiffAdd", opts)
-            vim.api.nvim_set_hl(0, "DiffChange", opts)
-            vim.api.nvim_set_hl(0, "DiffDelete", { reverse = true })
-            local fg_incsearch = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID('IncSearch')), 'bg', 'gui')
-            vim.api.nvim_set_hl(0, 'DiffText', { reverse = true, bold = true , fg = fg_incsearch })
+            -- For diff
+            -- local opts1 = { underline = true, bold = true }
+            local opts1 = { underline = true }
+            vim.api.nvim_set_hl(0, "DiffAdd", opts1)
+            vim.api.nvim_set_hl(0, "DiffChange", opts1)
+            vim.api.nvim_set_hl(0, "DiffDelete", opts)
+            -- local fg_incsearch = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID('IncSearch')), 'bg', 'gui')
+            -- vim.api.nvim_set_hl(0, 'DiffText', { reverse = true, bold = true , fg = fg_incsearch })
+            vim.api.nvim_set_hl(0, 'DiffText', opts)
 
-            local fg_conceal = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Conceal")), "fg", "gui")
-            vim.api.nvim_set_hl(0, "CursorLineNr", { fg = fg_conceal })
-            vim.api.nvim_set_hl(0, "LineNr", { fg = fg_conceal })
-            vim.api.nvim_set_hl(0, "LineNrAbove", { fg = fg_conceal })
-            vim.api.nvim_set_hl(0, "LineNrBelow", { fg = fg_conceal })
-            vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { fg = fg_conceal })
-            vim.api.nvim_set_hl(0, 'WinSeparator', { fg = fg_conceal })
+            -- For borders
+            local opts2 = { fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Conceal")), "fg", "gui") }
+            vim.api.nvim_set_hl(0, "CursorLineNr", opts2)
+            vim.api.nvim_set_hl(0, "LineNr", opts2)
+            vim.api.nvim_set_hl(0, "LineNrAbove", opts2)
+            vim.api.nvim_set_hl(0, "LineNrBelow", opts2)
+            vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', opts2)
+            vim.api.nvim_set_hl(0, 'WinSeparator', opts2)
           end
         })
         if not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) then
