@@ -205,6 +205,30 @@ return {
   },
   {
     "folke/snacks.nvim",
+    keys = {
+      {
+        "<leader>dr",
+        function()
+          local ft = vim.opt.filetype:get()
+          local dir = vim.fn.expand("%:p:h")
+          local fileName = vim.fn.expand("%:t")
+          local fileNameWithoutExt = vim.fn.expand("%:t:r")
+          local fileExt = vim.fn.expand("%:e")
+          local cmd
+
+          if ft == "pdf" then
+            cmd = ("cd '%s' && pdftoppm -f 1 -l 1 -png '%s' > '/tmp/%s.png' && chafa '/tmp/%s.png'"):format(dir, fileName, fileNameWithoutExt, fileNameWithoutExt)
+          elseif ft == "python" then
+            cmd = ("cd '%s' && python '%s'"):format(dir, fileName)
+          elseif fileExt == "png" or fileExt == "jpg" or fileExt == "gif" or fileExt == "svg" then
+            cmd = ("cd '%s' && chafa '%s'"):format(dir, fileName)
+          end
+          if not cmd then return end
+          Snacks.terminal(cmd, { cwd = LazyVim.root(), interactive = false, win = { on_buf = function () vim.cmd.startinsert() end } })
+        end,
+        desc = "Debug run command for current filetype"
+      },
+    },
     opts = {
       notifier = { enabled = false },
       dashboard = { enabled = false },
