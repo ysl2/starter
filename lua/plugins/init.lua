@@ -641,4 +641,17 @@ return {
       })
     end
   },
+  {
+    "andis-sprinkis/lf-vim",
+    ft = "lf",
+    config = function()
+      -- Ref: https://github.com/andis-sprinkis/lf-vim/compare/master...sarmong:lf-vim:master
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "lf",
+        callback = function()
+          vim.opt_local.commentstring = "# %s"
+        end
+      })
+    end
+  }
 }
