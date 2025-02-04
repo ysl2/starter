@@ -14,6 +14,7 @@ vim.opt.lazyredraw = true
 vim.opt.clipboard = ""
 vim.opt.confirm = false
 vim.opt.conceallevel = 0
+vim.opt.list = false
 
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
