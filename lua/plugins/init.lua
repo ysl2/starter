@@ -511,6 +511,7 @@ return {
     opts = {
       outline_window = {
         width = 20,
+        jump_highlight_duration = vim.highlight.priorities.user,
       },
       symbol_folding = {
         autofold_depth = vim.opt.foldlevel:get(),
