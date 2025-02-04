@@ -31,5 +31,5 @@ vim.g.snacks_animate = false
 vim.g.ai_cmp = false
 vim.g.lazyvim_blink_main = true
 vim.g.autowrite = false
--- vim.g.lazyvim_cmp = "nvim-cmp"
+vim.g.lazyvim_cmp = vim.system({ "which", "cargo" }):wait().code == 0 and vim.g.lazyvim_cmp or "nvim-cmp"
 vim.g.root_spec = { "cwd" }
