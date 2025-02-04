@@ -37,17 +37,17 @@ vim.cmd([[
 	" delete character under cursor
 	:cnoremap <C-D>		<Del>
 	" end of line
-  :cnoremap <C-E>		<End>
+	:cnoremap <C-E>		<End>
 	" forward one character
 	:cnoremap <C-F>		<Right>
 	" recall newer command-line
 	:cnoremap <C-N>		<Down>
 	" recall previous (older) command-line
 	:cnoremap <C-P>		<Up>
-	" back one word
-	:cnoremap <Esc><C-B>	<S-Left>
-	" forward one word
-	:cnoremap <Esc><C-F>	<S-Right>
+	" " back one word
+	" :cnoremap <Esc><C-B>	<S-Left>
+	" " forward one word
+	" :cnoremap <Esc><C-F>	<S-Right>
 ]])
 vim.keymap.set("t", "<C-[>", "<C-\\><C-n>", { silent = true, desc = "Back to normal mode in terminal" })
 vim.keymap.set("n", "<C-w>z", "<C-w>|<C-w>_", { silent = true, desc = "Maximize current window" })
