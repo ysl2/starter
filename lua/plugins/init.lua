@@ -586,6 +586,13 @@ return {
           },
         },
       },
+      buffers = {
+        winopts = {
+          preview = {
+            hidden = false,
+          },
+        },
+      }
     },
   },
   {
