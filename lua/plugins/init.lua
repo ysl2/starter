@@ -677,4 +677,8 @@ return {
       focus = true,
     },
   },
+  {
+    "AndrewRadev/linediff.vim",
+    cmd = "Linediff"
+  },
 }
