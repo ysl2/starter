@@ -33,3 +33,4 @@ vim.g.ai_cmp = false
 vim.g.lazyvim_blink_main = true
 vim.g.lazyvim_cmp = vim.system({ "which", "cargo" }):wait().code == 0 and vim.g.lazyvim_cmp or "nvim-cmp"
 vim.g.root_spec = { "cwd" }
+vim.g.lazyvim_python_lsp = "jedi_language_server"

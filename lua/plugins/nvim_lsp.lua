@@ -59,7 +59,42 @@ return {
             },
           },
         },
+        -- basedpyright = {
+        --   settings = {
+        --     basedpyright = {
+        --       analysis = {
+        --         typeCheckingMode = "off",
+        --         diagnosticSeverityOverrides = {
+        --           reportUnusedImport = "none",
+        --           reportUnusedVariable = "none",
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
       },
+      -- setup = {
+      --   -- Ref: https://www.reddit.com/r/neovim/comments/108tjy0/nvimlspconfig_how_to_disable_hints_for_unused
+      --   basedpyright = function()
+      --     -- LazyVim.lsp.on_attach(function(client, _)
+      --     --   local function pyright_filter(diagnostic)
+      --     --     return not (
+      --     --       diagnostic.message:find("Error") or
+      --     --       diagnostic.message:find("Expected") or
+      --     --       diagnostic.message:find("Statements must be separated by newlines or semicolons")
+      --     --     )
+      --     --   end
+      --     --   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+      --     --     function(_, params, client_id, _, config)
+      --     --       params.diagnostics = vim.tbl_filter(pyright_filter, params.diagnostics)
+      --     --       vim.lsp.diagnostic.on_publish_diagnostics(_, params, client_id, _, config)
+      --     --     end,
+      --     --     {}
+      --     --   )
+      --     -- end, "basedpyright")
+      --     LazyVim.lsp.on_attach(function() vim.lsp.handlers["textDocument/publishDiagnostics"] = nil end, "basedpyright")
+      --   end,
+      -- },
       diagnostics = {
         virtual_text = false,
         float = {
