@@ -670,5 +670,11 @@ return {
         end
       })
     end
-  }
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {
+      focus = true,
+    },
+  },
 }
