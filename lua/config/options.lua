@@ -16,6 +16,9 @@ vim.opt.confirm = false
 vim.opt.autowrite = false
 vim.opt.conceallevel = 0
 vim.opt.list = false
+-- Ref: https://www.reddit.com/r/vim/comments/s9gqgr/smartindent_messing_with_comment_indents
+-- Ref: https://www.reddit.com/r/vim/wiki/vimrctips/#wiki_do_not_use_smartindent
+vim.opt.smartindent = false
 
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
