@@ -13,6 +13,7 @@ vim.opt.lazyredraw = true
 -- ==
 vim.opt.clipboard = ""
 vim.opt.confirm = false
+vim.opt.autowrite = false
 vim.opt.conceallevel = 0
 vim.opt.list = false
 
@@ -30,6 +31,5 @@ vim.g.autoformat = false
 vim.g.snacks_animate = false
 vim.g.ai_cmp = false
 vim.g.lazyvim_blink_main = true
-vim.g.autowrite = false
 vim.g.lazyvim_cmp = vim.system({ "which", "cargo" }):wait().code == 0 and vim.g.lazyvim_cmp or "nvim-cmp"
 vim.g.root_spec = { "cwd" }
