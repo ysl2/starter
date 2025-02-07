@@ -6,6 +6,8 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
 local function clean_dangling_tmux_sessions(args)
   local tmux = os.getenv("MYTMUX")
   tmux = tmux ~= "" and tmux or "tmux"
@@ -48,4 +50,11 @@ vim.api.nvim_create_autocmd("VimLeave", {
   end,
 })
 
-vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+-- Check if we need to reload the gitsigns when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  callback = function()
+    if package.loaded["gitsigns"] and vim.o.buftype ~= "nofile" then
+      require("gitsigns").reset_base()
+    end
+  end,
+})
