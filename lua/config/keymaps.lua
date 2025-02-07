@@ -70,27 +70,16 @@ vim.keymap.set({"n", "v"}, "<C-d>", function() return vim.opt.wrap:get() and "<C
 vim.keymap.set({"n", "v"}, "<C-u>", function() return vim.opt.wrap:get() and "<C-u>g0" or "<C-u>" end, { expr = true, silent = true, desc = "Half Page Up (Smart Wrap)" })
 
 -- Diffview
-local diffwins = {}
-local function diffwins_clean()
-  vim.cmd("diffoff!")
-  diffwins = {}
-end
 vim.keymap.set("n", "<leader>da", function()
-  if #diffwins >= 2 then return diffwins_clean() end
-  local win = vim.fn.winnr()
-  local catched = false
-  for _, w in ipairs(diffwins) do
-    if w == win then
-      catched = true
-      break
+  local wins = vim.api.nvim_list_wins()
+  local diff_wins = 0
+  for _, win in ipairs(wins) do
+    if vim.api.nvim_win_call(win, function() return vim.wo.diff end) then
+      diff_wins = diff_wins + 1
     end
   end
-  if catched then
-    vim.cmd("diffoff")
-    table.remove(diffwins, win)
-  else
-    vim.cmd("diffthis")
-    table.insert(diffwins, win)
-  end
+  if diff_wins >= 2 then vim.cmd("diffoff!") return end
+  if vim.wo.diff then vim.cmd("diffoff") return end
+  vim.cmd("diffthis")
 end, { silent = true, desc = "Diff this buffer" })
-vim.keymap.set("n", "<leader>do", diffwins_clean, { silent = true, desc = "Diff off all buffers" })
+vim.keymap.set("n", "<leader>do", function () vim.cmd("diffoff!") end , { silent = true, desc = "Diff off all buffers" })
