@@ -245,6 +245,13 @@ return {
         end,
         desc = "Debug run command for current filetype"
       },
+      {
+        "<leader>t",
+        function ()
+          Snacks.terminal(vim.fn.input(""), { cwd = LazyVim.root(), interactive = true })
+        end,
+        desc = "Run custom command in snacks terminal."
+      },
     },
     opts = {
       notifier = { enabled = false },
