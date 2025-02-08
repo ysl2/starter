@@ -5,7 +5,7 @@ return {
       github = {
         download_url_template = "https://ghfast.top/https://github.com/%s/releases/download/%s/%s",
       },
-      ensure_installed = { "prettierd" },
+      ensure_installed = { "prettierd", "latexindent" },
     },
   },
   {
@@ -161,6 +161,14 @@ return {
         }
       })
     end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        tex = { "latexindent" },
+      },
+    },
   },
   {
     "stevearc/conform.nvim",
