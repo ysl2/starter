@@ -132,6 +132,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    cond = vim.g.lazyvim_cmp == "nvim-cmp",
     url = "git@github.com:iguanacucumber/magazine.nvim.git",
     opts = {
       window = {
@@ -146,9 +147,9 @@ return {
       }),
     }
   },
-  { "hrsh7th/cmp-nvim-lsp", url = "git@github.com:iguanacucumber/mag-nvim-lsp.git" },
-  { "hrsh7th/cmp-buffer", url = "git@github.com:iguanacucumber/mag-buffer.git" },
-  { "hrsh7th/cmp-path", url = "https://codeberg.org/FelipeLema/cmp-async-path" },
+  { "hrsh7th/cmp-nvim-lsp", cond = vim.g.lazyvim_cmp == "nvim-cmp", url = "git@github.com:iguanacucumber/mag-nvim-lsp.git" },
+  { "hrsh7th/cmp-buffer", cond = vim.g.lazyvim_cmp == "nvim-cmp", url = "git@github.com:iguanacucumber/mag-buffer.git" },
+  { "hrsh7th/cmp-path", cond = vim.g.lazyvim_cmp == "nvim-cmp", url = "https://codeberg.org/FelipeLema/cmp-async-path" },
   {
     "ray-x/lsp_signature.nvim",
     event = "InsertEnter",
