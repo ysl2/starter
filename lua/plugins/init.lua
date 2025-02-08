@@ -140,7 +140,7 @@ return {
     opts = function()
       local parsers = require("nvim-treesitter.parsers").get_parser_configs()
       for _, p in pairs(parsers) do
-        p.install_info.url = p.install_info.url:gsub("https://github.com/", "https://mirror.ghproxy.com/https://github.com/")
+        p.install_info.url = p.install_info.url:gsub("https://github.com/", "https://ghfast.top/https://github.com/")
       end
     end,
   },
