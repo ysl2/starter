@@ -699,4 +699,17 @@ return {
     "AndrewRadev/linediff.vim",
     cmd = "Linediff"
   },
+  {
+    "kevinhwang91/nvim-fundo",
+    lazy = false,
+    dependencies = "kevinhwang91/promise-async",
+    build = function()
+      require("fundo").install()
+    end,
+    config = function()  -- NOTE: This plugin is required to be configured specifically. The `config = true` will not work.
+      require("fundo").setup({
+        archives_dir = vim.fn.stdpath("state") .. "/fundo",
+      })
+    end
+  },
 }
