@@ -72,6 +72,13 @@ return {
         --     },
         --   },
         -- },
+        jedi_language_server = {
+          init_options = {
+            completion = {
+              disableSnippets = true,
+            },
+          },
+        },
       },
       -- setup = {
       --   -- Ref: https://www.reddit.com/r/neovim/comments/108tjy0/nvimlspconfig_how_to_disable_hints_for_unused
