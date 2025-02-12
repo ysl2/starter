@@ -29,6 +29,12 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.shiftwidth = 2
   end
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    vim.opt_local.expandtab = false
+  end
+})
 
 vim.g.autoformat = false
 vim.g.snacks_animate = false
