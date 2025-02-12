@@ -69,20 +69,17 @@ return {
             -- For search
             local opts = { reverse = true }
             vim.api.nvim_set_hl(0, "Visual", opts)
-            vim.api.nvim_set_hl(0, "IncSearch", opts)
             vim.api.nvim_set_hl(0, "Search", opts)
-            vim.api.nvim_set_hl(0, "CurSearch", opts)
-            vim.api.nvim_set_hl(0, "Substitute", opts)
+            vim.api.nvim_set_hl(0, "CurSearch", { link = "IncSearch" })
+            vim.api.nvim_set_hl(0, "Substitute", { link = "IncSearch" })
+            vim.api.nvim_set_hl(0, "YankyYanked", { link = "IncSearch" })
 
             -- For diff
-            -- local opts1 = { underline = true, bold = true }
             local opts1 = { underline = true }
             vim.api.nvim_set_hl(0, "DiffAdd", opts1)
             vim.api.nvim_set_hl(0, "DiffChange", opts1)
             vim.api.nvim_set_hl(0, "DiffDelete", opts)
-            -- local fg_incsearch = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID('IncSearch')), 'bg', 'gui')
-            -- vim.api.nvim_set_hl(0, 'DiffText', { reverse = true, bold = true , fg = fg_incsearch })
-            vim.api.nvim_set_hl(0, 'DiffText', opts)
+            vim.api.nvim_set_hl(0, "DiffText", { link = "IncSearch" })
 
             -- For borders
             local opts2 = { fg = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Conceal")), "fg", "gui") }
