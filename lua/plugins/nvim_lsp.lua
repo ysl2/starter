@@ -159,6 +159,8 @@ return {
   { "hrsh7th/cmp-path", cond = vim.g.lazyvim_cmp == "nvim-cmp", url = "https://codeberg.org/FelipeLema/cmp-async-path" },
   {
     "ray-x/lsp_signature.nvim",
+    custom = true,
+    cond = vim.g.lazyvim_cmp == "nvim-cmp",
     event = "InsertEnter",
     config = function() -- Ref: https://github.com/ray-x/lsp_signature.nvim/issues/341#issuecomment-2466260487
       require("lsp_signature").on_attach({
