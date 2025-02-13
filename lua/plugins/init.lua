@@ -21,9 +21,15 @@ return {
   { import = "lazyvim.plugins.extras.util.project" },
 
   -- Colorschemes
-  { "Mofiqul/vscode.nvim", cond = not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1) },
+  {
+    "Mofiqul/vscode.nvim",
+    custom = true,
+    cond = not not vim.g.started_by_firenvim or "leetcode.nvim" == vim.fn.argv(0, -1)
+  },
   -- { "folke/tokyonight.nvim", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
-  { "thesimonho/kanagawa-paper.nvim",
+  {
+    "thesimonho/kanagawa-paper.nvim",
+    custom = true,
     cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1),
     opts = {
       dimInactive = false,
@@ -143,6 +149,7 @@ return {
   },
   {
     "csexton/trailertrash.vim",
+    custom = true,
     event = "VeryLazy",
     config = function()
       vim.cmd("hi link UnwantedTrailerTrash NONE")
@@ -153,6 +160,7 @@ return {
   },
   {
     "s1n7ax/nvim-window-picker",
+    custom = true,
     keys = {
       {
         "<C-w><C-w>",
@@ -276,6 +284,7 @@ return {
   },
   {
     "glacambre/firenvim",
+    custom = true,
     build = function() vim.fn["firenvim#install"](0) end,
     -- Lazy load firenvim
     -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
@@ -365,6 +374,7 @@ return {
   { "folke/flash.nvim", enabled = false },
   {
     "kylechui/nvim-surround",
+    custom = true,
     -- version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     opts = {
@@ -377,6 +387,7 @@ return {
   },
   {
     "smoka7/hop.nvim",
+    custom = true,
     -- version = "*",
     event = "VeryLazy",
     keys = {
@@ -393,6 +404,7 @@ return {
   },
   {
     'kevinhwang91/nvim-hlslens',
+    custom = true,
     keys = {
       { "/" },
       { "?" },
@@ -455,6 +467,7 @@ return {
   },
   {
     "kawre/leetcode.nvim",
+    custom = true,
     lazy = "leetcode.nvim" ~= vim.fn.argv(0, -1),
     cmd = "Leet",
     build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
@@ -524,6 +537,7 @@ return {
   },
   {
     "Vimjas/vim-python-pep8-indent",
+    custom = true,
     ft = "python"
   },
   {
@@ -612,6 +626,7 @@ return {
   },
   {
     "tpope/vim-rsi",
+    custom = true,
     event = "InsertEnter"
   },
   {
@@ -639,6 +654,7 @@ return {
   },
   {
     "jiaoshijie/undotree",
+    custom = true,
     dependencies = "nvim-lua/plenary.nvim",
     keys = {
       { "<leader>ut", function() require("undotree").toggle() end, desc = "Toggle undotree" },
@@ -664,6 +680,7 @@ return {
   },
   {
     "andis-sprinkis/lf-vim",
+    custom = true,
     ft = "lf",
     config = function()
       -- Ref: https://github.com/andis-sprinkis/lf-vim/compare/master...sarmong:lf-vim:master
@@ -694,10 +711,12 @@ return {
   },
   {
     "AndrewRadev/linediff.vim",
+    custom = true,
     cmd = "Linediff"
   },
   {
     "kevinhwang91/nvim-fundo",
+    custom = true,
     lazy = false,
     dependencies = "kevinhwang91/promise-async",
     build = function()
