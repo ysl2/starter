@@ -337,20 +337,6 @@ return {
           end
         end,
       })
-      -- Auto delete [No Name] buffers.
-      vim.api.nvim_create_autocmd("BufLeave", {
-        callback = function()
-          local buffers = vim.fn.filter(vim.fn.range(1, vim.fn.bufnr("$")),
-            'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val) < 0 && (getbufline(v:val, 1, "$") == [""])')
-          local next = next
-          if next(buffers) == nil then return end
-          local cmdstr = ":silent! bw!"
-          for _, v in pairs(buffers) do
-            cmdstr = cmdstr .. " " .. v
-          end
-          vim.cmd(cmdstr)
-        end
-      })
     end
   },
   {
