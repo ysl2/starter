@@ -1,12 +1,13 @@
 return {
   -- Imports
+  -- NOTE: Priority ref: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/xtras.lua
+  -- Priority: 50 (default)
   -- { import = "lazyvim.plugins.extras.ai.copilot-chat", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
   { import = "lazyvim.plugins.extras.ai.copilot", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
   { import = "lazyvim.plugins.extras.ai.tabnine", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
   { import = "lazyvim.plugins.extras.coding.neogen" },
   { import = "lazyvim.plugins.extras.coding.yanky" },
   { import = "lazyvim.plugins.extras.editor.inc-rename" },
-  { import = "lazyvim.plugins.extras.editor.outline" },
   { import = "lazyvim.plugins.extras.lang.git" },
   { import = "lazyvim.plugins.extras.lang.go", cond = vim.system({ "which", "go" }):wait().code == 0 },
   { import = "lazyvim.plugins.extras.lang.json" },
@@ -19,6 +20,8 @@ return {
   { import = "lazyvim.plugins.extras.ui.indent-blankline" },
   { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   { import = "lazyvim.plugins.extras.util.project" },
+  -- Priority: 100
+  { import = "lazyvim.plugins.extras.editor.outline" },
 
   -- Colorschemes
   {
