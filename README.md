@@ -4,9 +4,11 @@ A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
 Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
 
 ```bash
-sudo apt install -y xsel
-brew install rustup; rustup toolchain install nightly
+sudo apt install -y xsel  # For clipboard support
+brew install rustup; rustup toolchain install nightly  # For blink.cmp
+brew install pngpaste  # For img-clip.nvim
 
+# For zathura in vimtex
 # Ref: https://github.com/zegervdv/homebrew-zathura?tab=readme-ov-file#osx_native_integration
 brew install girara --HEAD
 brew install zathura --HEAD
