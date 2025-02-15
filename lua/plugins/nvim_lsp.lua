@@ -9,7 +9,7 @@ return {
     },
   },
   {
-    "Saghen/blink.cmp",
+    "saghen/blink.cmp",
     -- NOTE: brew install rustup; rustup toolchain install nightly
     build = "http_proxy=127.0.0.1:7890 https_proxy=127.0.0.1:7890 cargo build --release",
     opts = {
@@ -24,7 +24,7 @@ return {
     },
   },
   {
-    "Saghen/blink.cmp",
+    "saghen/blink.cmp",
     opts = function (_, opts)
       -- From upstream: remove the "ai_accept" because I use `<C-g>` for ai completion.
       if not opts.keymap["<Tab>"] then
