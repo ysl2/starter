@@ -624,6 +624,8 @@ return {
       end
       vim.g.vimtex_quickfix_mode = 0
       vim.g.vimtex_view_zathura_use_synctex = 0
+      -- Ref: https://github.com/lervag/vimtex/issues/2007
+      vim.g.vimtex_indent_enabled = 0
     end
   },
   {
