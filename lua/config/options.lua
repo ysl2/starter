@@ -33,6 +33,8 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "tex",
   callback = function()
     vim.opt_local.expandtab = false
+    -- Ref: https://vi.stackexchange.com/a/34778
+    vim.opt_local.indentexpr = ""
   end
 })
 
