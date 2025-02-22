@@ -608,6 +608,7 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    enabled = false,
     -- ft = { "markdown", "norg", "rmd", "org", "Avante" },
     ft = "Avante",
     opts = {
@@ -782,7 +783,7 @@ return {
       "echasnovski/mini.icons", -- or echasnovski/mini.icons
       "zbirenbaum/copilot.lua", -- for providers='copilot'
       "HakonHarnes/img-clip.nvim",  -- support for image pasting
-      "MeanderingProgrammer/render-markdown.nvim",  -- Make sure to set this up properly if you have lazy=true
+      -- "MeanderingProgrammer/render-markdown.nvim",  -- Make sure to set this up properly if you have lazy=true
       {
         "saghen/blink.cmp",
         opts = {
