@@ -5,7 +5,7 @@ return {
       github = {
         download_url_template = "https://ghfast.top/https://github.com/%s/releases/download/%s/%s",
       },
-      ensure_installed = { "prettierd", "latexindent" },
+      ensure_installed = { "prettierd", "latexindent", "cspell" },
     },
   },
   {
@@ -207,5 +207,35 @@ return {
         table.insert(opts.formatters_by_ft[ft], "prettierd")
       end
     end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters = {
+        cspell = {
+          args = {
+            'lint',
+            '--no-color',
+            '--no-progress',
+            '--no-summary',
+            '--config=' .. vim.fn.stdpath("config") .. "/cspell.json",
+          },
+        },
+      },
+    },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = function (_, opts)
+      local supported = {
+        "tex",
+        "markdown",
+      }
+      opts.linters_by_ft = opts.linters_by_ft or {}
+      for _, ft in ipairs(supported) do
+        opts.linters_by_ft[ft] = opts.linters_by_ft[ft] or {}
+        table.insert(opts.linters_by_ft[ft], "cspell")
+      end
+    end
   },
 }
