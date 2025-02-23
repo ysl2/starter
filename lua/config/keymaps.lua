@@ -83,3 +83,8 @@ vim.keymap.set("n", "<leader>da", function()
   vim.cmd("diffthis")
 end, { silent = true, desc = "Diff this buffer" })
 vim.keymap.set("n", "<leader>do", function () vim.cmd("diffoff!") end , { silent = true, desc = "Diff off all buffers" })
+
+-- For neovide/firenvim copy/paste in MacOS.
+vim.keymap.set("n", "<D-v>", "\"+p<CR>", { noremap = true, silent = true })
+vim.keymap.set({ "i", "t" }, "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.keymap.set("v", "<D-c>", "\"+y<CR>", { noremap = true, silent = true })
