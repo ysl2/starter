@@ -7,3 +7,4 @@ foo.*
 *.log
 data
 lazyvim.json
+localhost.lua
