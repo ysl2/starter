@@ -268,12 +268,12 @@ return {
     -- Lazy load firenvim
     -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
     cond = not not vim.g.started_by_firenvim,
-    config = function()
+    config = function()  -- NOTE: Must be in `config` instead of `opts`, otherwise firenvim will complain.
       vim.api.nvim_create_autocmd("UIEnter", {
         callback = function()
           local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
           if client and client.name == "Firenvim" then
-            vim.cmd("set guifont=FiraCode\\ Nerd\\ Font:h25")
+            vim.opt.guifont = "FiraCode Nerd Font:h25"
             vim.opt.laststatus = 0
             vim.opt.swapfile = false
           end
