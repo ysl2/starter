@@ -8,6 +8,9 @@
 pcall(vim.cmd, "autocmd! nvim_swapfile")
 vim.opt.lazyredraw = true
 
+-- Allow copy paste in Neovide
+vim.g.neovide_input_use_logo = 1
+
 -- ==
 -- == Set by LazyVim, and modified by myself
 -- ==
