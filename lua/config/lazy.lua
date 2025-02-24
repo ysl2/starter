@@ -69,7 +69,7 @@ require("lazy").setup({
         "gzip",
         "man",
         "matchit",
-        "matchparen",
+        -- "matchparen",
         "netrwPlugin",
         "osc52",
         "rplugin",
