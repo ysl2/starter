@@ -104,8 +104,8 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      highlight = { additional_vim_regex_highlighting = { "python" } },
-      indent = { disable = { "python" } },
+      -- highlight = { additional_vim_regex_highlighting = { "python" } },
+      -- indent = { disable = { "python" } },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -500,11 +500,11 @@ return {
       },
     },
   },
-  {
-    "Vimjas/vim-python-pep8-indent",
-    custom = true,
-    ft = "python"
-  },
+  -- {
+  --   "ysl2/vim-python-pep8-indent",
+  --   custom = true,
+  --   ft = "python"
+  -- },
   {
     "ibhagwan/fzf-lua",
     keys = {
