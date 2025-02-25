@@ -501,7 +501,7 @@ return {
     },
   },
   {
-    "Vimjas/vim-python-pep8-indent",
+    "ysl2/vim-python-pep8-indent",
     custom = true,
     ft = "python"
   },
