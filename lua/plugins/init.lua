@@ -396,7 +396,7 @@ return {
     opts = {
       suggestion = {
         keymap = {
-          accept = "<C-l>",
+          accept_line = "<C-l>",
         },
       }
     }
@@ -838,5 +838,77 @@ return {
   {
     "eandrju/cellular-automaton.nvim",
     cmd = "CellularAutomaton"
+  },
+  {
+    "robitx/gp.nvim",
+    custom = true,
+    dependencies = "MunifTanjim/nui.nvim",
+    opts = {
+      providers = {
+        openai = {
+          -- endpoint = "https://api.siliconflow.cn/v1/chat/completions",  -- Siliconflow
+          endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",  -- Qwen
+        },
+      },
+      -- default_command_agent = "Pro/deepseek-ai/DeepSeek-R1",
+      -- default_chat_agent = "Pro/deepseek-ai/DeepSeek-R1",
+      default_command_agent = "qwen-max-latest",
+      default_chat_agent = "qwen-max-latest",
+      agents = {
+        {
+          name = "Pro/deepseek-ai/DeepSeek-R1",
+          chat = true,
+          command = true,
+          model = "Pro/deepseek-ai/DeepSeek-R1",
+          system_prompt = "system",
+        },
+        {
+          name = "qwen-max-latest",
+          chat = true,
+          command = true,
+          model = "qwen-max-latest",
+          system_prompt = "system",
+        },
+      },
+    },
+  },
+  {
+    "robitx/gp.nvim",
+    custom = true,
+    keys = {
+      { "<C-_>", desc = "GpChatToggle" },
+    },
+    opts = function()
+      local Popup = require("nui.popup")
+      local popup = nil
+      -- TODO: Consider the case when using <C-g>d to delete chat context.
+      vim.keymap.set({ "n", "i" } , "<C-_>", function()
+        if not popup then
+          popup = Popup({
+            position = "50%",
+            size = { width = "80%", height = "80%" },
+            enter = true,
+            focusable = true,
+            relative = "editor",
+            border = { style = "single" },
+            buf_options = {
+              modifiable = true,
+              readonly = false,
+            },
+          })
+          popup:show()
+          popup:map("n", "<C-w>q", function() popup:hide() end)
+          vim.cmd("GpChatToggle current")
+          return
+        end
+        -- TODO: Drag gp's opening window from other tab.
+        if popup.winid and vim.api.nvim_win_is_valid(popup.winid) then
+          popup:hide()
+        else
+          popup:show()
+          popup:map("n", "<C-w>q", function() popup:hide() end)
+        end
+      end)
+    end
   },
 }
