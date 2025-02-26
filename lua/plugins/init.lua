@@ -396,9 +396,7 @@ return {
     opts = {
       suggestion = {
         keymap = {
-          accept = "<C-g>",
-          accept_word = "<C-g>",
-          accept_line = "<C-g>"
+          accept_line = "<C-l>",
         },
       }
     }
