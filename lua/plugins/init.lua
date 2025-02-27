@@ -427,12 +427,12 @@ return {
         },
       },
       providers = {
-        copilot = {
-          -- prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
-          -- prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
+        openai = {
+          prepare_input = require("CopilotChat.config.providers").copilot.prepare_input,
+          prepare_output = require("CopilotChat.config.providers").copilot.prepare_output,
           get_headers = function ()
             return {
-              ['Authorization'] = "Bearer " .. os.getenv("OPENAI_API_KEY")
+              ["Authorization"] = "Bearer " .. os.getenv("OPENAI_API_KEY"),
             }
           end,
           get_models = function(headers)
