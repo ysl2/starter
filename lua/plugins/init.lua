@@ -401,33 +401,78 @@ return {
       }
     }
   },
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   keys = {
-  --     { "<C-0>", "<leader>aa", desc = "Toggle (CopilotChat)", mode = { "n", "v" }, remap = true },
-  --   },
-  --   build = "make tiktoken", -- Only on MacOS or Linux
-  --   opts = {
-  --     -- model = "o1",
-  --     window = {
-  --       layout = "float",
-  --       width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
-  --       height = 0.8, -- fractional height of parent, or absolute height in rows when > 1
-  --     },
-  --     mappings = {
-  --       complete = {
-  --         insert = "<C-g>",
-  --       },
-  --       close = {
-  --         normal = "<C-0>",
-  --         insert = "<C-0>",
-  --       },
-  --       submit_prompt = {
-  --         insert = "<C-CR>",
-  --       },
-  --     }
-  --   },
-  -- },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    keys = {
+      { "<C-_>", "<leader>aa", desc = "Toggle (CopilotChat)", mode = { "n", "v" }, remap = true },
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      model = "qwen-max-latest",
+      agent = "qwen",
+      window = {
+        layout = "float",
+        width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
+        height = 0.8, -- fractional height of parent, or absolute height in rows when > 1
+      },
+      mappings = {
+        complete = {
+          insert = "<C-l>",
+        },
+        close = {
+          normal = "<C-_>",
+          insert = "<C-_>",
+        },
+        submit_prompt = {
+          insert = "<C-s>",
+        },
+      },
+      providers = {
+        qwen = {
+          prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
+          prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
+          get_headers = function ()
+            return {
+              ['Authorization'] = "Bearer " .. os.getenv("OPENAI_API_KEY")
+            }
+          end,
+          get_models = function(headers)
+            local response, err = require("CopilotChat.utils").curl_get("https://dashscope.aliyuncs.com/compatible-mode/v1/models", {
+              headers = headers,
+              json_response = true,
+            })
+            if err then
+              error(err)
+            end
+            return vim.tbl_map(function(model)
+              return {
+                id = model.id,
+                name = model.id,
+              }
+            end, response.body.data)
+          end,
+          embed = function(inputs, headers)
+            local response, err = require("CopilotChat.utils").curl_post("https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings", {
+              headers = headers,
+              json_request = true,
+              json_response = true,
+              body = {
+                input = inputs,
+                model = "text_embedding_v3",
+              },
+            })
+            if err then
+              error(err)
+            end
+            return response.body.data
+          end,
+          get_url = function()
+            return "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+          end,
+        },
+      },
+    },
+  },
   {
     "kawre/leetcode.nvim",
     custom = true,
@@ -839,76 +884,81 @@ return {
     "eandrju/cellular-automaton.nvim",
     cmd = "CellularAutomaton"
   },
-  {
-    "robitx/gp.nvim",
-    custom = true,
-    dependencies = "MunifTanjim/nui.nvim",
-    opts = {
-      providers = {
-        openai = {
-          -- endpoint = "https://api.siliconflow.cn/v1/chat/completions",  -- Siliconflow
-          endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",  -- Qwen
-        },
-      },
-      -- default_command_agent = "Pro/deepseek-ai/DeepSeek-R1",
-      -- default_chat_agent = "Pro/deepseek-ai/DeepSeek-R1",
-      default_command_agent = "qwen-max-latest",
-      default_chat_agent = "qwen-max-latest",
-      agents = {
-        {
-          name = "Pro/deepseek-ai/DeepSeek-R1",
-          chat = true,
-          command = true,
-          model = "Pro/deepseek-ai/DeepSeek-R1",
-          system_prompt = "system",
-        },
-        {
-          name = "qwen-max-latest",
-          chat = true,
-          command = true,
-          model = "qwen-max-latest",
-          system_prompt = "system",
-        },
-      },
-    },
-  },
-  {
-    "robitx/gp.nvim",
-    custom = true,
-    keys = {
-      { "<C-_>", desc = "GpChatToggle" },
-    },
-    opts = function()
-      local Popup = require("nui.popup")
-      local popup = nil
-      -- TODO: Consider the case when using <C-g>d to delete chat context.
-      vim.keymap.set({ "n", "i" } , "<C-_>", function()
-        if not popup then
-          popup = Popup({
-            position = "50%",
-            size = { width = "80%", height = "80%" },
-            enter = true,
-            focusable = true,
-            relative = "editor",
-            border = { style = "single" },
-            buf_options = {
-              modifiable = true,
-              readonly = false,
-            },
-          })
-          popup:show()
-          popup:map("n", "<C-w>q", function() popup:hide() end)
-          vim.cmd("GpChatToggle current")
-          return
-        end
-        -- TODO: Drag gp's opening window from other tab.
-        if popup.winid and vim.api.nvim_win_is_valid(popup.winid) then
-          popup:hide()
-        else
-          popup:show()
-          popup:map("n", "<C-w>q", function() popup:hide() end)
-        end
-      end)
-    end
-  },
+  -- {
+  --   "robitx/gp.nvim",
+  --   custom = true,
+  --   keys = {
+  --     { "<C-_>", function ()
+  --       vim.cmd("GpChatToggle popup")
+  --     end, desc = "GpChatToggle" },
+  --   },
+  --   opts = {
+  --     providers = {
+  --       openai = {
+  --         -- endpoint = "https://api.siliconflow.cn/v1/chat/completions",  -- Siliconflow
+  --         endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",  -- Qwen
+  --       },
+  --     },
+  --     -- default_command_agent = "Pro/deepseek-ai/DeepSeek-R1",
+  --     -- default_chat_agent = "Pro/deepseek-ai/DeepSeek-R1",
+  --     default_command_agent = "qwen-max-latest",
+  --     default_chat_agent = "qwen-max-latest",
+  --     agents = {
+  --       {
+  --         name = "Pro/deepseek-ai/DeepSeek-R1",
+  --         chat = true,
+  --         command = true,
+  --         model = "Pro/deepseek-ai/DeepSeek-R1",
+  --         system_prompt = "system",
+  --       },
+  --       {
+  --         name = "qwen-max-latest",
+  --         chat = true,
+  --         command = true,
+  --         model = "qwen-max-latest",
+  --         system_prompt = "system",
+  --       },
+  --     },
+  --   },
+  -- },
+  -- {
+  --   "robitx/gp.nvim",
+  --   custom = true,
+  --   dependencies = "MunifTanjim/nui.nvim",
+  --   keys = {
+  --     { "<C-_>", desc = "GpChatToggle" },
+  --   },
+  --   opts = function()
+  --     local Popup = require("nui.popup")
+  --     local popup = nil
+  --     -- TODO: Consider the case when using <C-g>d to delete chat context.
+  --     vim.keymap.set({ "n", "i" } , "<C-_>", function()
+  --       if not popup then
+  --         popup = Popup({
+  --           position = "50%",
+  --           size = { width = "80%", height = "80%" },
+  --           enter = true,
+  --           focusable = true,
+  --           relative = "editor",
+  --           border = { style = "single" },
+  --           buf_options = {
+  --             modifiable = true,
+  --             readonly = false,
+  --           },
+  --         })
+  --         popup:show()
+  --         popup:map("n", "<C-w>q", function() popup:hide() end)
+  --         vim.cmd("GpChatToggle current")
+  --         return
+  --       end
+  --       -- TODO: Drag gp's opening window from other tab.
+  --       if popup.winid and vim.api.nvim_win_is_valid(popup.winid) then
+  --         popup:hide()
+  --       else
+  --         popup:show()
+  --         popup:map("n", "<C-w>q", function() popup:hide() end)
+  --       end
+  --     end)
+  --   end
+  -- },
 }
