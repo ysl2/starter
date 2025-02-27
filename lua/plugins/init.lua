@@ -408,8 +408,7 @@ return {
     },
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
-      model = "qwen-max-latest",
-      agent = "qwen",
+      model = "Pro/deepseek-ai/DeepSeek-V3",
       window = {
         layout = "float",
         width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
@@ -428,16 +427,16 @@ return {
         },
       },
       providers = {
-        qwen = {
-          prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
-          prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
+        copilot = {
+          -- prepare_input = require('CopilotChat.config.providers').copilot.prepare_input,
+          -- prepare_output = require('CopilotChat.config.providers').copilot.prepare_output,
           get_headers = function ()
             return {
               ['Authorization'] = "Bearer " .. os.getenv("OPENAI_API_KEY")
             }
           end,
           get_models = function(headers)
-            local response, err = require("CopilotChat.utils").curl_get("https://dashscope.aliyuncs.com/compatible-mode/v1/models", {
+            local response, err = require("CopilotChat.utils").curl_get("https://api.siliconflow.cn/v1/models", {
               headers = headers,
               json_response = true,
             })
@@ -452,13 +451,13 @@ return {
             end, response.body.data)
           end,
           embed = function(inputs, headers)
-            local response, err = require("CopilotChat.utils").curl_post("https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings", {
+            local response, err = require("CopilotChat.utils").curl_post("https://api.siliconflow.cn/v1/embeddings", {
               headers = headers,
               json_request = true,
               json_response = true,
               body = {
                 input = inputs,
-                model = "text_embedding_v3",
+                model = "Pro/BAAI/bge-m3",
               },
             })
             if err then
@@ -467,7 +466,7 @@ return {
             return response.body.data
           end,
           get_url = function()
-            return "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+            return "https://api.siliconflow.cn/v1/chat/completions"
           end,
         },
       },
