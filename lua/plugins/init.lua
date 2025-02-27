@@ -401,33 +401,79 @@ return {
       }
     }
   },
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   keys = {
-  --     { "<C-0>", "<leader>aa", desc = "Toggle (CopilotChat)", mode = { "n", "v" }, remap = true },
-  --   },
-  --   build = "make tiktoken", -- Only on MacOS or Linux
-  --   opts = {
-  --     -- model = "o1",
-  --     window = {
-  --       layout = "float",
-  --       width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
-  --       height = 0.8, -- fractional height of parent, or absolute height in rows when > 1
-  --     },
-  --     mappings = {
-  --       complete = {
-  --         insert = "<C-g>",
-  --       },
-  --       close = {
-  --         normal = "<C-0>",
-  --         insert = "<C-0>",
-  --       },
-  --       submit_prompt = {
-  --         insert = "<C-CR>",
-  --       },
-  --     }
-  --   },
-  -- },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    keys = {
+      { "<C-9>", "<leader>aa", desc = "Toggle (CopilotChat)", mode = { "n", "v" }, remap = true },
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      model = "Pro/deepseek-ai/DeepSeek-V3",
+      window = {
+        layout = "float",
+        width = 0.8, -- fractional width of parent, or absolute width in columns when > 1
+        height = 0.8, -- fractional height of parent, or absolute height in rows when > 1
+      },
+      mappings = {
+        close = {
+          normal = "<C-9>",
+          insert = "<C-9>",
+        },
+        reset = {
+          callback = function()
+            require("CopilotChat").reset()
+            vim.defer_fn(function()
+              vim.cmd("startinsert")
+            end, 100)
+          end
+        }
+      },
+      providers = {
+        openai = {
+          prepare_input = require("CopilotChat.config.providers").copilot.prepare_input,
+          prepare_output = require("CopilotChat.config.providers").copilot.prepare_output,
+          get_headers = function()
+            return {
+              ["Authorization"] = "Bearer " .. (vim.g.OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")),
+            }
+          end,
+          get_models = function(headers)
+            local response, err = require("CopilotChat.utils").curl_get("https://api.siliconflow.cn/v1/models", {
+              headers = headers,
+              json_response = true,
+            })
+            if err then
+              error(err)
+            end
+            return vim.tbl_map(function(model)
+              return {
+                id = model.id,
+                name = model.id,
+              }
+            end, response.body.data)
+          end,
+          embed = function(inputs, headers)
+            local response, err = require("CopilotChat.utils").curl_post("https://api.siliconflow.cn/v1/embeddings", {
+              headers = headers,
+              json_request = true,
+              json_response = true,
+              body = {
+                input = inputs,
+                model = "Pro/BAAI/bge-m3",
+              },
+            })
+            if err then
+              error(err)
+            end
+            return response.body.data
+          end,
+          get_url = function()
+            return "https://api.siliconflow.cn/v1/chat/completions"
+          end,
+        },
+      },
+    },
+  },
   {
     "kawre/leetcode.nvim",
     custom = true,
@@ -733,110 +779,116 @@ return {
       },
     },
   },
-  {
-    "yetone/avante.nvim",
-    custom = true,
-    event = "VeryLazy",
-    -- lazy = false,
-    -- version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
-    opts = {
-      -- add any opts here
-      -- for example
-      provider = "openai",
-      openai = {
-        endpoint = "https://api.siliconflow.cn/v1",
-        model = "Pro/deepseek-ai/DeepSeek-R1", -- your desired model (or use gpt-4o, etc.)
-        disable_tools = true,
-        -- timeout = 30000, -- timeout in milliseconds
-        -- temperature = 0, -- adjust if needed
-        -- max_tokens = 4096,
-      },
-      windows = {
-        sidebar_header = {
-          rounded = false,
-        },
-        edit = {
-          border = "single",
-        },
-        ask = {
-          border = "single",
-        },
-      },
-      file_selector = {
-        provider = "fzf", -- Avoid native provider issues
-        provider_opts = {},
-      },
-    },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = LazyVim.is_win() and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "http_proxy=127.0.0.1:7890 https_proxy=127.0.0.1:7890 make",
-    dependencies = {
-      -- "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      -- The below dependencies are optional,
-      -- "echasnovski/mini.pick", -- for file_selector provider mini.pick
-      -- "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      -- "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua", -- for file_selector provider fzf
-      "echasnovski/mini.icons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
-      "HakonHarnes/img-clip.nvim",  -- support for image pasting
-      -- "MeanderingProgrammer/render-markdown.nvim",  -- Make sure to set this up properly if you have lazy=true
-      {
-        "saghen/blink.cmp",
-        opts = {
-          sources = {
-            default = { "avante_commands", "avante_mentions", "avante_files" },
-            compat = {
-              "avante_commands",
-              "avante_mentions",
-              "avante_files",
-            },
-            -- LSP score_offset is typically 60
-            providers = {
-              avante_commands = {
-                name = "avante_commands",
-                module = "blink.compat.source",
-                score_offset = 90,
-                opts = {},
-              },
-              avante_files = {
-                name = "avante_files",
-                module = "blink.compat.source",
-                score_offset = 100,
-                opts = {},
-              },
-              avante_mentions = {
-                name = "avante_mentions",
-                module = "blink.compat.source",
-                score_offset = 1000,
-                opts = {},
-              },
-            },
-          },
-        },
-      },
-      {
-        "saghen/blink.compat",
-        opts = function()
-          -- monkeypatch cmp.ConfirmBehavior for Avante
-          require("cmp").ConfirmBehavior = {
-            Insert = "insert",
-            Replace = "replace",
-          }
-        end,
-      },
-      {
-        "folke/which-key.nvim",
-        optional = true,
-        opts = {
-          spec = {
-            { "<leader>a", group = "ai" },
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "yetone/avante.nvim",
+  --   custom = true,
+  --   event = "VeryLazy",
+  --   -- lazy = false,
+  --   -- version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+  --   opts = {
+  --     -- add any opts here
+  --     -- for example
+  --     provider = "openai",
+  --     -- openai = {
+  --     --   endpoint = "https://api.siliconflow.cn/v1",
+  --     --   model = "Pro/deepseek-ai/DeepSeek-R1",
+  --     --   disable_tools = true,
+  --     -- },
+  --     openai = {
+  --       endpoint = "https://api.siliconflow.cn/v1",
+  --       model = "Pro/deepseek-ai/DeepSeek-V3",
+  --       disable_tools = true,
+  --     },
+  --     -- openai = {
+  --     --   endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  --     --   model = "qwen-max-latest",
+  --     -- },
+  --     windows = {
+  --       sidebar_header = {
+  --         rounded = false,
+  --       },
+  --       edit = {
+  --         border = "single",
+  --       },
+  --       ask = {
+  --         border = "single",
+  --       },
+  --     },
+  --     file_selector = {
+  --       provider = "fzf", -- Avoid native provider issues
+  --       provider_opts = {},
+  --     },
+  --   },
+  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  --   build = LazyVim.is_win() and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" or "http_proxy=127.0.0.1:7890 https_proxy=127.0.0.1:7890 make",
+  --   dependencies = {
+  --     -- "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     -- The below dependencies are optional,
+  --     -- "echasnovski/mini.pick", -- for file_selector provider mini.pick
+  --     -- "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+  --     -- "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+  --     "ibhagwan/fzf-lua", -- for file_selector provider fzf
+  --     "echasnovski/mini.icons", -- or echasnovski/mini.icons
+  --     "zbirenbaum/copilot.lua", -- for providers='copilot'
+  --     "HakonHarnes/img-clip.nvim",  -- support for image pasting
+  --     -- "MeanderingProgrammer/render-markdown.nvim",  -- Make sure to set this up properly if you have lazy=true
+  --     {
+  --       "saghen/blink.cmp",
+  --       opts = {
+  --         sources = {
+  --           default = { "avante_commands", "avante_mentions", "avante_files" },
+  --           compat = {
+  --             "avante_commands",
+  --             "avante_mentions",
+  --             "avante_files",
+  --           },
+  --           -- LSP score_offset is typically 60
+  --           providers = {
+  --             avante_commands = {
+  --               name = "avante_commands",
+  --               module = "blink.compat.source",
+  --               score_offset = 90,
+  --               opts = {},
+  --             },
+  --             avante_files = {
+  --               name = "avante_files",
+  --               module = "blink.compat.source",
+  --               score_offset = 100,
+  --               opts = {},
+  --             },
+  --             avante_mentions = {
+  --               name = "avante_mentions",
+  --               module = "blink.compat.source",
+  --               score_offset = 1000,
+  --               opts = {},
+  --             },
+  --           },
+  --         },
+  --       },
+  --     },
+  --     {
+  --       "saghen/blink.compat",
+  --       opts = function()
+  --         -- monkeypatch cmp.ConfirmBehavior for Avante
+  --         require("cmp").ConfirmBehavior = {
+  --           Insert = "insert",
+  --           Replace = "replace",
+  --         }
+  --       end,
+  --     },
+  --     {
+  --       "folke/which-key.nvim",
+  --       optional = true,
+  --       opts = {
+  --         spec = {
+  --           { "<leader>a", group = "ai" },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "eandrju/cellular-automaton.nvim",
     cmd = "CellularAutomaton"
