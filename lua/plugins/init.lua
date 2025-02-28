@@ -434,7 +434,7 @@ return {
           prepare_output = require("CopilotChat.config.providers").copilot.prepare_output,
           get_headers = function()
             return {
-              ["Authorization"] = "Bearer " .. (vim.g.OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")),
+              ["Authorization"] = "Bearer " .. (_G.localhost.OPENAI_API_KEY or os.getenv("OPENAI_API_KEY")),
             }
           end,
           get_models = function(headers)

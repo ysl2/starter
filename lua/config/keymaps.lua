@@ -12,7 +12,7 @@ vim.keymap.del({ "n", "x", "o" }, "N")
 
 vim.keymap.set("n", "<leader>ba", function() Snacks.bufdelete.all() end, { desc = "Delete All Buffers" })
 vim.keymap.set("n", "<c-\\>", function()
-  local tmux = os.getenv("MYTMUX")
+  local tmux = _G.localhost.MYTMUX or os.getenv("MYTMUX")
   tmux = tmux ~= "" and tmux or "tmux"
   Snacks.terminal(tmux .. " new-session -s" .. " nvim-" .. vim.loop.os_getpid(), { cwd = LazyVim.root() })
 end, { desc = "Tmux (Root Dir)" })
