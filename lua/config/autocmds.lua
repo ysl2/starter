@@ -9,7 +9,7 @@
 vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 local function clean_dangling_tmux_sessions(args)
-  local tmux = os.getenv("MYTMUX")
+  local tmux = _G.localhost.MYTMUX or os.getenv("MYTMUX")
   tmux = tmux ~= "" and tmux or "tmux"
 
   -- Get all tmux sessions that have a name starting with "nvim-".
