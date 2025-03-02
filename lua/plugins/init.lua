@@ -419,6 +419,14 @@ return {
           normal = "<C-_>",
           insert = "<C-_>",
         },
+        reset = {
+          callback = function()
+            require("CopilotChat").reset()
+            vim.defer_fn(function()
+              vim.cmd("startinsert")
+            end, 100)
+          end
+        }
       },
       providers = {
         openai = {
