@@ -21,6 +21,8 @@ require("lazy").setup({
 
     -- Imports
     -- NOTE: Priority ref: ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/xtras.lua
+    -- Priority: 10
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
     -- Priority: 50 (default)
     { import = "lazyvim.plugins.extras.ai.copilot-chat" },
     { import = "lazyvim.plugins.extras.ai.copilot", cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1) },
