@@ -921,10 +921,6 @@ return {
   --   },
   -- },
   {
-    "eandrju/cellular-automaton.nvim",
-    cmd = "CellularAutomaton"
-  },
-  {
     "dhruvasagar/vim-table-mode",
     cmd = "TableModeToggle",
     keys = {
