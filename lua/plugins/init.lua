@@ -312,11 +312,16 @@ return {
       })
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = { "github.com_*.txt", "gitee.com_*.txt" },
-        command = "set filetype=markdown"
+        callback = function()
+          vim.opt.filetype = "markdown"
+        end
       })
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = { "leetcode.com_*.txt", "leetcode.cn_*.txt" },
-        command = "set filetype=python"
+        callback = function()
+          vim.opt.filetype = "python"
+          vim.opt.expandtab = true
+        end
       })
       vim.g.firenvim_config = {
         localSettings = {
@@ -326,7 +331,8 @@ return {
           -- ["https?://github1s\\.com/*"] = { priority = 1, takeover = "never" },
           -- ["https?://docs\\.qq\\.com/*"] = { priority = 1, takeover = "never" },
           -- [".*"] = { priority = 0 },
-          [".*"] = { priority = 1, takeover = "never" },
+          -- ["https?://leetcode\\.cn/problems/*"] = { priority = 1, takeover = "always" },
+          [".*"] = { priority = 0, takeover = "never" },
         }
       }
     end
