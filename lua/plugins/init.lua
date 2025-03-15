@@ -553,8 +553,12 @@ return {
       sections = {
         lualine_z = {
           function()
-            local date = vim.loop.os_uname().sysname == "Darwin" and "gdate" or "date"
-            return " " .. vim.system({ date, "+%H:%M:%S.%3N" }, { text = true }):wait().stdout:gsub("\n", "")
+            -- local date = vim.loop.os_uname().sysname == "Darwin" and "gdate" or "date"
+            -- return " " .. vim.system({ date, "+%H:%M:%S.%3N" }, { text = true }):wait().stdout:gsub("\n", "")
+            local now = os.date("*t")
+            local seconds = os.clock()
+            local milliseconds = math.floor((seconds - math.floor(seconds)) * 1000)
+            return string.format(" %02d:%02d:%02d.%03d", now.hour, now.min, now.sec, milliseconds)
           end,
         }
       }
