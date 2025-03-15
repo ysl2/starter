@@ -642,16 +642,16 @@ return {
             ["alt-h"] = false,
             ["alt-i"] = false,
             ["ctrl-g"] = false,
-            ["ctrl-h"] = fzf_lua.actions.toggle_hidden,
-            ["ctrl-l"] = fzf_lua.actions.toggle_ignore
+            ["ctrl-y"] = fzf_lua.actions.toggle_hidden,
+            ["ctrl-o"] = fzf_lua.actions.toggle_ignore
           },
         },
         grep = {
           actions = {
             ["alt-h"] = false,
             ["alt-i"] = false,
-            ["ctrl-h"] = fzf_lua.actions.toggle_hidden,
-            ["ctrl-l"] = fzf_lua.actions.toggle_ignore
+            ["ctrl-y"] = fzf_lua.actions.toggle_hidden,
+            ["ctrl-o"] = fzf_lua.actions.toggle_ignore
           },
           winopts = {
             preview = {
