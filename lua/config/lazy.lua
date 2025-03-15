@@ -31,7 +31,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.editor.inc-rename" },
     { import = "lazyvim.plugins.extras.lang.git" },
-    { import = "lazyvim.plugins.extras.lang.go", cond = vim.system({ "which", "go" }):wait().code == 0 },
+    { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "lazyvim.plugins.extras.lang.python" },
