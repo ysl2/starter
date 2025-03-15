@@ -592,82 +592,81 @@ return {
       { "<leader><leader>", "<leader>fF", desc = "Find Files (cwd)", remap = true },
       { "<leader>/", "<leader>sG", desc = "Grep (cwd)", remap = true },
     },
-    opts = {
-      winopts = {
-        border = "single",
-        preview = {
-          border = "single",
-          hidden = true,
-          vertical = "down:15,border-top",
-          layout = "vertical",
-        },
-      },
-      keymap = {
-        builtin = {
-          true,
-          ["<C-r>"] = "toggle-preview",
-          ["<C-u>"] = "preview-page-up",
-          ["<C-d>"] = "preview-page-down",
-        },
-        fzf = {
-          true,
-          ["ctrl-r"] = "toggle-preview",
-          ["ctrl-u"] = "preview-page-up",
-          ["ctrl-d"] = "preview-page-down",
-        },
-      },
-      actions = {
-        files = {
-          true,
-          ["ctrl-t"] = require("fzf-lua").actions.file_tabedit,
-        },
-      },
-      files = {
-        actions = {
-          ["alt-h"] = false,
-          ["alt-i"] = false,
-          ["ctrl-g"] = false,
-          ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden,
-          ["ctrl-l"] = require("fzf-lua").actions.toggle_ignore
-        },
-      },
-      grep = {
-        actions = {
-          ["alt-h"] = false,
-          ["alt-i"] = false,
-          ["ctrl-h"] = require("fzf-lua").actions.toggle_hidden,
-          ["ctrl-l"] = require("fzf-lua").actions.toggle_ignore
-        },
-        winopts = {
-          preview = {
-            hidden = false,
-          },
-        },
-      },
-      lsp = {
-        winopts = {
-          preview = {
-            hidden = false,
-          },
-        },
-      },
-      buffers = {
-        winopts = {
-          preview = {
-            hidden = false,
-          },
-        },
-      }
-    },
-  },
-  {
-    "ibhagwan/fzf-lua",
     opts = function()
-      local config = require("fzf-lua").config
-      config.defaults.keymap.fzf["ctrl-f"] = nil
-      config.defaults.keymap.fzf["ctrl-b"] = nil
-      config.defaults.keymap.builtin["<c-f>"] = nil
-      config.defaults.keymap.builtin["<c-b>"] = nil
+      local fzf_lua = require("fzf-lua")
+
+      fzf_lua.config.defaults.keymap.fzf["ctrl-f"] = nil
+      fzf_lua.config.defaults.keymap.fzf["ctrl-b"] = nil
+      fzf_lua.config.defaults.keymap.builtin["<c-f>"] = nil
+      fzf_lua.config.defaults.keymap.builtin["<c-b>"] = nil
+
+      return {
+        winopts = {
+          border = "single",
+          preview = {
+            border = "single",
+            hidden = true,
+            vertical = "down:15,border-top",
+            layout = "vertical",
+          },
+        },
+        keymap = {
+          builtin = {
+            true,
+            ["<C-r>"] = "toggle-preview",
+            ["<C-u>"] = "preview-page-up",
+            ["<C-d>"] = "preview-page-down",
+          },
+          fzf = {
+            true,
+            ["ctrl-r"] = "toggle-preview",
+            ["ctrl-u"] = "preview-page-up",
+            ["ctrl-d"] = "preview-page-down",
+          },
+        },
+        actions = {
+          files = {
+            true,
+            ["ctrl-t"] = fzf_lua.actions.file_tabedit,
+          },
+        },
+        files = {
+          actions = {
+            ["alt-h"] = false,
+            ["alt-i"] = false,
+            ["ctrl-g"] = false,
+            ["ctrl-h"] = fzf_lua.actions.toggle_hidden,
+            ["ctrl-l"] = fzf_lua.actions.toggle_ignore
+          },
+        },
+        grep = {
+          actions = {
+            ["alt-h"] = false,
+            ["alt-i"] = false,
+            ["ctrl-h"] = fzf_lua.actions.toggle_hidden,
+            ["ctrl-l"] = fzf_lua.actions.toggle_ignore
+          },
+          winopts = {
+            preview = {
+              hidden = false,
+            },
+          },
+        },
+        lsp = {
+          winopts = {
+            preview = {
+              hidden = false,
+            },
+          },
+        },
+        buffers = {
+          winopts = {
+            preview = {
+              hidden = false,
+            },
+          },
+        }
+      }
     end
   },
   {
