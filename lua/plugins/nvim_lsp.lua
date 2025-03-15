@@ -141,18 +141,21 @@ return {
     "hrsh7th/nvim-cmp",
     cond = vim.g.lazyvim_cmp == "nvim-cmp",
     url = "git@github.com:iguanacucumber/magazine.nvim.git",
-    opts = {
-      window = {
-        completion = require("cmp").config.window.bordered({ border = "single" }),
-        documentation = require("cmp").config.window.bordered({ border = "single" }),
-      },
-      mapping = require("cmp").mapping.preset.insert({
-        ["<tab>"] = function(fallback)
-          -- From upstream: remove the "ai_accept" because I use `<C-g>` for ai completion.
-          return LazyVim.cmp.map({ "snippet_forward" }, fallback)()
-        end,
-      }),
-    }
+    opts = function()
+      local cmp = require("cmp")
+      return {
+        window = {
+          completion = cmp.config.window.bordered({ border = "single" }),
+          documentation = cmp.config.window.bordered({ border = "single" }),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<tab>"] = function(fallback)
+            -- From upstream: remove the "ai_accept" because I use `<C-g>` for ai completion.
+            return LazyVim.cmp.map({ "snippet_forward" }, fallback)()
+          end,
+        }),
+      }
+    end
   },
   { "hrsh7th/cmp-nvim-lsp", cond = vim.g.lazyvim_cmp == "nvim-cmp", url = "git@github.com:iguanacucumber/mag-nvim-lsp.git" },
   { "hrsh7th/cmp-buffer", cond = vim.g.lazyvim_cmp == "nvim-cmp", url = "git@github.com:iguanacucumber/mag-buffer.git" },
