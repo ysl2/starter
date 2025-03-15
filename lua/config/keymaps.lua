@@ -12,9 +12,15 @@ vim.keymap.del({ "n", "x", "o" }, "N")
 
 vim.keymap.set("n", "<leader>ba", function() Snacks.bufdelete.all() end, { desc = "Delete All Buffers" })
 vim.keymap.set("n", "<c-\\>", function()
-  local tmux = _G.localhost.MYTMUX or os.getenv("MYTMUX")
-  tmux = tmux ~= "" and tmux or "tmux"
-  Snacks.terminal(tmux .. " new-session -s" .. " nvim-" .. vim.loop.os_getpid(), { cwd = LazyVim.root() })
+  local cmd = nil
+  if LazyVim.is_win() then
+    cmd = "pwsh"
+  else
+    local tmux = _G.localhost.MYTMUX or os.getenv("MYTMUX")
+    tmux = tmux ~= "" and tmux or "tmux"
+    cmd = tmux .. " new-session -s" .. " nvim-" .. vim.loop.os_getpid() .. " " .. os.getenv("SHELL")
+  end
+  Snacks.terminal(cmd, { cwd = LazyVim.root() })
 end, { desc = "Tmux (Root Dir)" })
 vim.keymap.set("t", "<C-\\>", "<C-/>", { remap = true, desc = "Hide Terminal" })
 local function esc()
