@@ -11,7 +11,7 @@ return {
     custom = true,
     cond = not vim.g.started_by_firenvim and "leetcode.nvim" ~= vim.fn.argv(0, -1),
     opts = {
-      dimInactive = false,
+      dim_inactive = false,
       -- Ref: https://github.com/thesimonho/kanagawa-paper.nvim?tab=readme-ov-file#common-customizations
       overrides = function(colors)
         local theme = colors.theme
@@ -39,6 +39,9 @@ return {
           StatusLineNC = { bg = theme.ui.bg_p1 },
         }
       end,
+      styles = {
+        comment = { italic = false },
+      },
     },
   },
 
@@ -80,7 +83,7 @@ return {
           return "vscode"
         end
         -- return "tokyonight"
-        return "kanagawa-paper"
+        return "kanagawa-paper-ink"
       end)(),
       news = {
         lazyvim = false,
