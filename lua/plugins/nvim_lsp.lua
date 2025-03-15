@@ -11,7 +11,7 @@ return {
   {
     "saghen/blink.cmp",
     -- NOTE: brew install rustup; rustup toolchain install nightly
-    build = "http_proxy=127.0.0.1:7890 https_proxy=127.0.0.1:7890 cargo build --release",
+    build = "cargo build --release",
     opts = {
       completion = {
         menu = { border = "single" },
