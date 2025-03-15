@@ -3,6 +3,10 @@
 A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
 Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
 
+## Installation
+
+### Common
+
 ```bash
 sudo apt install -y xsel  # For clipboard support
 brew install rustup; rustup toolchain install nightly  # For blink.cmp
@@ -18,4 +22,10 @@ ln -s $(brew --prefix zathura-pdf-poppler)/libpdf-poppler.dylib $(brew --prefix 
 # https://ghproxy.link
 
 `custom = true`: This means that the plugin is added by myself.
+```
+
+### For windows specific
+
+```bash
+git clone git@github.com:ysl2/starter.git 'C:\Users\Songli Yu\AppData\Local\nvim'
 ```
