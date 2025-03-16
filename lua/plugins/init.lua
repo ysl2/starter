@@ -261,7 +261,7 @@ return {
         desc = "Debug run command for current filetype"
       },
       {
-        "<leader>t",
+        "<leader>\\",
         function ()
           Snacks.terminal(vim.fn.input(""), { cwd = LazyVim.root(), interactive = true })
         end,
@@ -931,6 +931,7 @@ return {
   -- },
   {
     "dhruvasagar/vim-table-mode",
+    ft = "markdown",
     cmd = "TableModeToggle",
     keys = {
       { "<leader>tm", "<Plug>TableModeToggle", desc = "Toggle table mode" },
