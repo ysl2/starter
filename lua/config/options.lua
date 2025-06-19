@@ -48,6 +48,12 @@ vim.opt.smartindent = false
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "tex", "lua" },
+  callback = function()
+    vim.opt_local.expandtab = false
+  end
+})
+vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   callback = function()
     vim.opt_local.tabstop = 2
@@ -57,7 +63,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "tex",
   callback = function()
-    vim.opt_local.expandtab = false
     -- Ref: https://vi.stackexchange.com/a/34778
     vim.opt_local.indentexpr = ""
   end,
