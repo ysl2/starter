@@ -5,7 +5,7 @@ return {
       github = {
         download_url_template = "https://ghfast.top/https://github.com/%s/releases/download/%s/%s",
       },
-      ensure_installed = { "latexindent", "cspell", "clang-format" },
+      ensure_installed = { "latexindent", "cspell", "clang-format", "ty" },
     },
   },
   {
@@ -46,40 +46,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      servers = {
-        gopls = {
-          settings = {
-            gopls = {
-              analyses = {
-                -- NOTE: LSP[gopls] Invalid settings: setting option "analyses": this setting is deprecated,
-                -- use "the 'fieldalignment' analyzer was removed in gopls/v0.17.0;
-                -- instead, hover over struct fields to see size/offset information (https://go.dev/issue/66861)" instead
-                fieldalignment = false,
-              },
-            },
-          },
-        },
-        -- basedpyright = {
-        --   settings = {
-        --     basedpyright = {
-        --       analysis = {
-        --         typeCheckingMode = "off",
-        --         diagnosticSeverityOverrides = {
-        --           reportUnusedImport = "none",
-        --           reportUnusedVariable = "none",
-        --         },
-        --       },
-        --     },
-        --   },
-        -- },
-        jedi_language_server = {
-          init_options = {
-            completion = {
-              disableSnippets = true,
-            },
-          },
-        },
-      },
       -- setup = {
       --   -- Ref: https://www.reddit.com/r/neovim/comments/108tjy0/nvimlspconfig_how_to_disable_hints_for_unused
       --   basedpyright = function()
@@ -131,6 +97,47 @@ return {
           })
         end,
       })
+
+      local servers = {
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = {
+                -- NOTE: LSP[gopls] Invalid settings: setting option "analyses": this setting is deprecated,
+                -- use "the 'fieldalignment' analyzer was removed in gopls/v0.17.0;
+                -- instead, hover over struct fields to see size/offset information (https://go.dev/issue/66861)" instead
+                fieldalignment = false,
+              },
+            },
+          },
+        },
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = "off",
+                diagnosticSeverityOverrides = {
+                  reportUnusedImport = "none",
+                  reportUnusedVariable = "none",
+                },
+              },
+            },
+          },
+        },
+        jedi_language_server = {
+          init_options = {
+            completion = {
+              disableSnippets = true,
+            },
+          },
+        },
+      }
+      for server, server_opts in pairs(servers) do
+        vim.lsp.config(server, server_opts)
+      end
+
+      vim.lsp.enable({ "gopls", "jedi_language_server", "ty" })
+      vim.lsp.enable({ "basedpyright", "ruff" }, false)
     end,
   },
   -- {
